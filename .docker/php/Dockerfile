@@ -12,8 +12,7 @@ RUN echo "alias sf=/appdata/www/bin/console" >> /home/appuser/.bashrc
 
 # Install packages and PHP extensions
 RUN apt-get update \
-    # common libraries and extensions
-    && apt-get install -y git acl openssl openssh-client wget zip \
+    && apt-get install -y git acl openssl openssh-client wget zip curl \
     && apt-get install -y libpng-dev zlib1g-dev libzip-dev libxml2-dev libicu-dev \
     && docker-php-ext-install intl pdo zip \
     # for MySQL
@@ -29,9 +28,16 @@ RUN composer self-update
 
 ## Install Symfony binary
 USER appuser
-RUN wget https://get.symfony.com/cli/installer -O - | bash
+RUN curl -sS https://get.symfony.com/cli/installer | bash
 USER root
-RUN mv /home/appuser/.symfony/bin/symfony /usr/local/bin/symfony
+RUN mv /home/appuser/.symfony5/bin/symfony /usr/local/bin/symfony
+
+RUN mkdir -p /appdata/www
+
+# Install PHP-CS-FIXER
+RUN wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O php-cs-fixer
+RUN chmod a+x php-cs-fixer
+RUN mv php-cs-fixer /usr/local/bin/php-cs-fixer
 
 RUN mkdir -p /appdata/www
 
