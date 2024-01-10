@@ -1,0 +1,35 @@
+! MONOLITO MODULAR !.- En los monolitos se solía tener lo sig:
+  - Controllers
+  - Services/Listeners
+  - Repositories (capa que se comunica con la DB)
+
+  Llega un momento cuando se trabaja con monolitos en los que nosotros tenemos diff
+  servicios por ejm para interacutuar con usuarios, productos, categorias, pedidos etc,
+  e igual los controladores.
+  Cuando crece esto muchas de las veces que un controlador puede llamar a varios servicios
+  y se genera mucha dependencia de unos con otros, estos servcios tienen varios repos
+  luego otro probelma es que hay un repo que está inyectado en más de un servicio porque
+  es necesario y alfinal se terminan generando dependencias que son dificil de mantener
+  más que to do de refactorizar.
+
+  Apartir de esto la solución de esto nacen los microservicios, es decir, cada servcio
+  hace una sola cosa una para productos, usuarios categorias, etc, incluso podemos
+  hacer deploy de cada servicio por lo tanto es más sencillo.
+  El problema de esto es que paa tener microservicios y que funcionen bien debemos tener
+  bien controlado el tema de observabilidad y tratabilidad.
+
+  Hay una nueva corriente ahora que viene como a reemplazara esto de los monolitos y no
+  depender de los microservicios que es los monolitos modulares.
+  La idea es tener un monolito que a su vez dentro contenga módulos, que estos módulos
+  sean independientes de otros módulos
+
+  Para optimización de DB, lo que podemos logra haciendo esto es poder tener nosotros en cada modulo una tabla
+  que trabaje ara dicho modulo, y n tener FK en otras tablas de otros modulos, es decir si en el modulo A tenemos una tabla
+  users está por ende está relacionada con la tabla products del modulo B, pero no tenemos que crear dicha relation en duro
+  si no una relación a medias, solo colocar por ejm el id del usuario que agrego dicho producto  tener una refrencia, en cambio si
+  en el modulo B tenemos nosotros products y categories, aquí si podemos crear la relación en duro osea crear una FK en la tabla
+  porque pertenecen al mismo modulo.
+
+
+
+
