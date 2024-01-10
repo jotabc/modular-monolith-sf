@@ -1,4 +1,4 @@
-FROM php:8.1.1-fpm
+FROM php:8.1.3-fpm
 
 ARG UID
 
@@ -9,6 +9,8 @@ RUN chown -R appuser:appuser /home/appuser/
 RUN echo "StrictHostKeyChecking no" >> /home/appuser/.ssh/config
 RUN echo "export COLUMNS=300" >> /home/appuser/.bashrc
 RUN echo "alias sf=/appdata/www/bin/console" >> /home/appuser/.bashrc
+
+COPY php.ini /usr/local/etc/php/conf.d/docker-php-config.ini
 
 # Install packages and PHP extensions
 RUN apt-get update \
@@ -23,7 +25,7 @@ RUN apt-get update \
     && docker-php-ext-enable --ini-name 05-opcache.ini opcache xdebug apcu
 
 # Install and update composer
-RUN curl https://getcomposer.org/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 RUN composer self-update
 
 ## Install Symfony binary
