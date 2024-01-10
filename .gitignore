@@ -3,6 +3,7 @@
 .idea
 
 /.env.local
+
 /.env.local.php
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
@@ -10,3 +11,8 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+###< Other folders ###
+docker-compose.yml
+###> Other folders ###
+
