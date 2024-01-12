@@ -1,11 +1,13 @@
 <?php
 
-namespace ModuleA\Entity;
+namespace Customer\Entity;
 
-class ModuleA
+class Customer
 {
+    private string $moduleAId;
+
     public function __construct(
-        private readonly string $id = 'module_a_id',
+        private readonly string $id
     ) { }
 
     public function getId(): string

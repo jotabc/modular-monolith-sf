@@ -34,8 +34,9 @@
     "autoload": {
         "psr-4": {
             "App\\": "src/",
-            "ModuleA\\": "src/ModuleA",
-            "ModuleB\\": "src/ModuleB"
+            "Employee\\": "src/Employee",
+            "Customer\\": "src/Customer",
+            "Rent\\": "src/Rent"
         }
     },
     "autoload-dev": {
