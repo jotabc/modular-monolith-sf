@@ -42,6 +42,8 @@ composer-install: ## Installs composer dependencies
 .PHONY: migrations
 migrations: ## run all migrations
 	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} bin/console doctrine:migrations:migrate -n
+	# para migraciones una a una lo más recomendable para que nos genere en cada schema el archivo de doctrine_migrations que es donde están todas las migraciones de dicho schema.
+	# U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} bin/console doctrine:migrations:execute 'DoctrineMigrations\Version20240112155502' -n --em=customer_em
 
 code-style: ## run code style
 	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} vendor/bin/php-cs-fixer fix src --rules=@Symfony
