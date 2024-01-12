@@ -1,6 +1,7 @@
 
 ###> symfony/framework-bundle ###
 /.idea
+.idea
 
 /.env.local
 
@@ -16,3 +17,8 @@
 docker-compose.yml
 ###> Other folders ###
 
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
