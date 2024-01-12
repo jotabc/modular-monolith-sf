@@ -2,11 +2,10 @@
 
 namespace Employee\Repository;
 
-use Employee\Repository\EmployeeRepository;
-use Doctrine\Persistence\ObjectManager;
-use Employee\Entity\Employee;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectManager;
+use Employee\Entity\Employee;
 
 class DoctrineEmployeeRepository implements EmployeeRepository
 {

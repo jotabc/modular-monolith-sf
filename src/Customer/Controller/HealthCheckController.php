@@ -13,5 +13,4 @@ class HealthCheckController
             'message' => 'Module Customer up and running',
         ]);
     }
-
 }

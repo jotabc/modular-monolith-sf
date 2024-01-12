@@ -13,5 +13,4 @@ class HealthCheckController
             'message' => 'Module Rent up and running',
         ]);
     }
-
 }

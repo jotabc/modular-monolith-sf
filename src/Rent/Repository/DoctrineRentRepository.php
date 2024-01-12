@@ -7,8 +7,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Rent\Entity\Rent;
 
-class DoctrineRentRepository implements RentRepository {
-
+class DoctrineRentRepository implements RentRepository
+{
     private readonly ServiceEntityRepository $repository;
     private readonly ObjectManager $manager;
 

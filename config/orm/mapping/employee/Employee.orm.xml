@@ -3,5 +3,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
     <entity name="Employee\Entity\Employee" table="employee">
         <id name="id" type="string" length="36" />
+
+        <field name="name" length="50" />
     </entity>
 </doctrine-mapping>

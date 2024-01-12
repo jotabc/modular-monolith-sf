@@ -13,5 +13,4 @@ class HealthCheckController
             'message' => 'Module Employee up and running',
         ]);
     }
-
 }
