@@ -1,8 +1,8 @@
 <?php
 
-namespace Customer\Repository;
+namespace Customer\Domain\Repository;
 
-use Customer\Entity\Customer;
+use Customer\Domain\Model\Customer;
 
 interface CustomerRepository
 {

@@ -20,9 +20,9 @@ doctrine:
                     Customer:
                         is_bundle: false
                         type: xml
-                        dir: '%kernel.project_dir%/config/orm/mapping/customer'
+                        dir: '%kernel.project_dir%/src/Customer/Infrastructure/Database/ORM/Doctrine/mapping'
                         #donde se encuentran las entidades a mapear
-                        prefix: 'Customer\Entity'
+                        prefix: 'Customer\Infrastructure\Database\ORM\Doctrine\Entity'
                         alias: Customer
             employee_em:
                 connection: employee_connection

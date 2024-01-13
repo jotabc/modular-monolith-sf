@@ -30,6 +30,33 @@
   en el modulo B tenemos nosotros products y categories, aquí si podemos crear la relación en duro osea crear una FK en la tabla
   porque pertenecen al mismo modulo.
 
+!!! ARQUITECURA HEXAGONAL !!!.- No es más que:
+    - En la carpeta de infraestructure lo relacionado con el framework (DB, Librerias de terceros, testing, Request, Controller).
+    - En la carpeta de application todos los casos de uso (Crear rent, consultar, borrarlo etc igual para customers).
+    - En la carpeta de domain todos nuestras entidades y nuestra lógica de negocio para trabajar con nuestras entidades (Servicios, entidades, interfaces para repos).
+
+    Lo ideal cuando trabajamos con ARQUITECURA HEXAGONAL es que tengamos en el namespace Domain que solo hayan cosas de domain y application y viceversa, lo que no podemos tener
+    nunca en un useCase de application un import de algo de symfony o import de doctrine.
+
+    Podemos usar Hexagonal en apps medianamente pequeñas, nos sirve mucho para desacoplarnos del Framework, es directamente usar to do lo que sea del framework usar en infrastructure
+    y to do lo que se application y domain que no tenga nada que ver con ningún framework eesto lo que nos va a permitir el día de mañana es que podemoas migrar de ORM, de Framework
+    o cualquier otro tipo de liberia sin tocar ni application ni domain.
+    Por ejm en nuestro Domain/Model aqui creamos el modelo de nuestra entidad en este ejm Customer
+    si nosotros por ejm estamos creando un variable que sea products que seria un array nosotros
+    no podemos tener en la carpeta Domain importaciones de doctrine o de cualquier
+    librería de terceros en este ejm, esto   aplica para domain y application ejm:
+
+    // esto esta incorrecto
+    use Doctrine\Common\Collections\Collection
+    private Collection products;
+
+    public function products(): Collection
+
+    // Correcto separando del dramwork el Domain, asi desligamos el framework o liberias
+    de nuestro domain.
+    private array products;
+    public function products(): iterable
+
 
 
 

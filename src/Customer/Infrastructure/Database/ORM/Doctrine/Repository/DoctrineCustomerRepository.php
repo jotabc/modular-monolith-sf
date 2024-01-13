@@ -1,8 +1,11 @@
 <?php
 
-namespace Customer\Repository;
+namespace Customer\Infrastructure\Database\ORM\Doctrine\Repository;
 
-use Customer\Entity\Customer;
+use Customer\Domain\Model\Customer;
+use Customer\Domain\Repository\CustomerRepository;
+
+use Customer\Infrastructure\Database\ORM\Doctrine\Entity\DoctrineCustomer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
@@ -14,13 +17,15 @@ class DoctrineCustomerRepository implements CustomerRepository
 
     public function __construct(ManagerRegistry $managerRegistry)
     {
-        $this->repository = new ServiceEntityRepository($managerRegistry, Customer::class);
+        $this->repository = new ServiceEntityRepository($managerRegistry, DoctrineCustomer::class);
         $this->manager = $managerRegistry->getManager();
     }
 
     public function save(Customer $customer): void
     {
-        $this->manager->persist($customer);
+        $doctrineCustomer = DoctrineCustomer::createFromDomainCustomer($customer);
+
+        $this->manager->persist($doctrineCustomer);
         $this->manager->flush();
     }
 }
