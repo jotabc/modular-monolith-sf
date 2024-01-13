@@ -7,7 +7,7 @@
         <field name="name" length="50" />
         <field name="address" length="100" />
         <field name="age" type="smallint" />
-        <field name="employeeId" length="36" />
+        <field name="employeeId" column="employee_id" length="36" />
 
     </entity>
 </doctrine-mapping>

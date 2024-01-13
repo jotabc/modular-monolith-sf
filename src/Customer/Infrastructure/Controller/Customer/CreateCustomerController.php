@@ -22,8 +22,11 @@ class CreateCustomerController
     {
         $data = \json_decode($request->getContent(), true);
 
-        $this->createCustomer->__invoke(CreateCustomerInputDTO::create($data['name'], $data['address'], $data['age'], $data['employeeId']));
+        $responseDto = $this->createCustomer->__invoke(CreateCustomerInputDTO::create($data['name'], $data['address'], $data['age'], $data['employeeId']));
 
-        return new JsonResponse(null, Response::HTTP_CREATED);
+        return new JsonResponse(
+            ['customerId' => $responseDto->id],
+            Response::HTTP_CREATED
+        );
     }
 }
