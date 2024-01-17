@@ -59,4 +59,11 @@
 
 
 
+NOTA.- Cuando es un payload de tipo
+    - POST, PUT O PATCH se recibe de "request" $request->request->get('id');
+    - GET se recibe de "attributes" => $request->attributes->get('id');
+    - QUERY PARAM(?name=juan) se recibe de "query" => $request->query->get('id');
+
+
+
 

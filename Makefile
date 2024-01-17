@@ -28,6 +28,7 @@ build: ## Rebuilds all the containers
 prepare: ## Runs backend commands
 	$(MAKE) composer-install
 	$(MAKE) migrations
+	$(MAKE) migrations-test
 
 run: ## starts the Symfony development server in detached mode
 	U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BE} symfony serve -d
@@ -39,11 +40,14 @@ logs: ## Show Symfony logs in real time
 composer-install: ## Installs composer dependencies
 	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} composer install --no-interaction
 
-.PHONY: migrations
-migrations: ## run all migrations
+.PHONY: migrations migrations-test
+migrations: ## run migrations for dev/prod environment
 	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} bin/console doctrine:migrations:migrate -n
 	# para migraciones una a una lo más recomendable para que nos genere en cada schema el archivo de doctrine_migrations que es donde están todas las migraciones de dicho schema.
 	# U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} bin/console doctrine:migrations:execute 'DoctrineMigrations\Version20240112155502' -n --em=customer_em
+
+migrations-test: ## run migrations for test environment
+	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} bin/console doctrine:migrations:migrate -n --env=test
 
 code-style: ## run code style
 	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} vendor/bin/php-cs-fixer fix src --rules=@Symfony
