@@ -10,6 +10,6 @@ services:
             - '../../src/Kernel.php'
             - '../../src/Tests/'
 
-    Customer\Infrastructure\Controller\:
-        resource: '../../src/Customer/Infrastructure/Controller/'
+    Customer\Adapter\Framework\Http\Controller\:
+        resource: '../../src/Customer/Adapter/Framework/Http/Controller'
         tags: [ name: controller.service_arguments ]
