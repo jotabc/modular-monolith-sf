@@ -11,14 +11,14 @@ class InvalidArgumentException extends NativeInvalidArgumentException
         return new static($message);
     }
 
-    public static function createFormArgument(string $argument): self
+    public static function createFromArgument(string $argument): self
     {
-        return new static(\sprintf('Invalid argument %s', $argument));
+        return new static(\sprintf('Invalid argument [%s]', $argument));
     }
 
-    public static function createFormArray(array $arguments): self
+    public static function createFromArray(array $arguments): self
     {
-        return new static(\sprintf('Invalid arguments %s', implode(', ', $arguments)));
+        return new static(\sprintf('Invalid arguments [%s]', implode(', ', $arguments)));
 
     }
 

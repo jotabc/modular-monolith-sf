@@ -15,7 +15,7 @@ class GetCustomerByIdInputDTO
     public static function create(?string $id): self
     {
         if (\is_null($id)) {
-            throw InvalidArgumentException::createFormArgument('id');
+            throw InvalidArgumentException::createFromArgument('id');
         }
 
         return new static($id);
