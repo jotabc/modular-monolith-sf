@@ -6,15 +6,14 @@ use Customer\Domain\Model\Customer;
 
 class GetCustomerByIdOutputDTO
 {
-
     private function __construct(
         public readonly string $id,
         public readonly string $name,
         public readonly string $address,
         public readonly int $age,
         public readonly string $employeeId
-    )
-    { }
+    ) {
+    }
 
     public static function create(Customer $customer): self
     {
@@ -25,7 +24,5 @@ class GetCustomerByIdOutputDTO
             $customer->age(),
             $customer->employeeId()
         );
-
     }
-
 }

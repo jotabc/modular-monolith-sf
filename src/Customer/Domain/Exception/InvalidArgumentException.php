@@ -2,7 +2,7 @@
 
 namespace Customer\Domain\Exception;
 
-use \InvalidArgumentException as NativeInvalidArgumentException;
+use InvalidArgumentException as NativeInvalidArgumentException;
 
 class InvalidArgumentException extends NativeInvalidArgumentException
 {
@@ -19,7 +19,10 @@ class InvalidArgumentException extends NativeInvalidArgumentException
     public static function createFromArray(array $arguments): self
     {
         return new static(\sprintf('Invalid arguments [%s]', implode(', ', $arguments)));
-
     }
 
+    public static function createFromMinAndMaxLength(int $min, int $max): self
+    {
+        return new static(\sprintf('Value must be min [%d] and max [%d] characters', $min, $max));
+    }
 }

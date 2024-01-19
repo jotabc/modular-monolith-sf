@@ -6,7 +6,6 @@ use Customer\Domain\Validator\ValidatorInterface;
 
 class Validator implements ValidatorInterface
 {
-
     public function validate(object $dto): void
     {
         // TODO: Implement validate() method.

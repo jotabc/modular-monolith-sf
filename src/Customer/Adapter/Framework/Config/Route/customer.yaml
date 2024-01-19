@@ -14,3 +14,7 @@ create_customer:
     controller: Customer\Adapter\Framework\Http\Controller\Customer\CreateCustomerController
     methods: [ POST ]
     
+update_customer:
+    path:  /{id}
+    controller: Customer\Adapter\Framework\Http\Controller\Customer\UpdateCustomerController
+    methods: [ PATCH ]

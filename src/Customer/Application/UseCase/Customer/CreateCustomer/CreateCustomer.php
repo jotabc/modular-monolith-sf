@@ -8,11 +8,12 @@ use Customer\Domain\Model\Customer;
 use Customer\Domain\Repository\CustomerRepository;
 use Customer\Domain\ValueObject\Uuid;
 
-# en application se implemento lo de domain interfaces etc.
+// en application se implemento lo de domain interfaces etc.
 class CreateCustomer
 {
     public function __construct(private CustomerRepository $repository)
-    { }
+    {
+    }
 
     public function handle(CreateCustomerInputDTO $dto): CreateCustomerOutputDTO
     {
@@ -21,7 +22,5 @@ class CreateCustomer
         $this->repository->save($customer);
 
         return new CreateCustomerOutputDTO($customer->id());
-
     }
-
 }
