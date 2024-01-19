@@ -8,13 +8,18 @@ namespace Customer\Domain\Model;
 ## Customer/Infrastructure/Database/ORM/Doctrine/Entity/DoctrineCustomer.php
 class Customer
 {
-    public function __construct(
+    private function __construct(
         private readonly string $id,
         private string $name,
         private string $address,
         private int $age,
         private readonly string $employeeId
     ) {
+    }
+
+    public static function create(string $id, string $name, string $address, int $age, string $employeeId): self
+    {
+        return new static($id, $name, $address, $age, $employeeId);
     }
 
     public function id(): string
