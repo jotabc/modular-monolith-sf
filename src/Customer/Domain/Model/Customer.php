@@ -2,12 +2,16 @@
 
 namespace Customer\Domain\Model;
 
-## en esta modelo es donde nosotros debemos de pasarle los tipos de datos primitivos
-## es decir el modelo no tiene que tener ninguna importación de librerias de terceros
-## el verdadero tipo de dato se deberia de pasar en nuestra entidad que está dentro de
-## Customer/Infrastructure/Database/ORM/Doctrine/Entity/DoctrineCustomer.php
+// # en esta modelo es donde nosotros debemos de pasarle los tipos de datos primitivos
+// # es decir el modelo no tiene que tener ninguna importación de librerias de terceros
+// # el verdadero tipo de dato se deberia de pasar en nuestra entidad que está dentro de
+// # Customer/Infrastructure/Database/ORM/Doctrine/Entity/DoctrineCustomer.php
 class Customer
 {
+    public const NAME_MIN_LENGTH = 2;
+    public const NAME_MAX_LENGTH = 10;
+    public const MINIMUM_AGE = 18;
+
     private function __construct(
         private readonly string $id,
         private string $name,
@@ -61,5 +65,4 @@ class Customer
     {
         return $this->employeeId;
     }
-
 }

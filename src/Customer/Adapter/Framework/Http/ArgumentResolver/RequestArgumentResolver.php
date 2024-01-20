@@ -10,11 +10,9 @@ use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 
 class RequestArgumentResolver implements ArgumentValueResolverInterface
 {
-
     public function __construct(
         private RequestTransformer $requestTransformer
-    )
-    {
+    ) {
     }
 
     public function supports(Request $request, ArgumentMetadata $argument): bool

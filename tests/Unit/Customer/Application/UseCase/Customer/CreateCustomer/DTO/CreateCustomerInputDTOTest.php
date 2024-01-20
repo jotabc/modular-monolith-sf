@@ -43,13 +43,12 @@ class CreateCustomerInputDTOTest extends TestCase
             null,
             self::VALUES['employeeId']
         );
-
     }
 
-    public function testNameLengthIsGreaterThan2(): void
+    public function testNameLengthIsLessThan2(): void
     {
         self::expectException(InvalidArgumentException::class);
-        self::expectExceptionMessage('Invalid argument [name]');
+        self::expectExceptionMessage('Value must be min [2] and max [10] characters');
 
         $dto = CreateCustomerInputDTO::create(
             'A',
@@ -57,16 +56,15 @@ class CreateCustomerInputDTOTest extends TestCase
             self::VALUES['age'],
             self::VALUES['employeeId']
         );
-
     }
 
-    public function testNameLengthIsLessThan10(): void
+    public function testNameLengthIsGreaterThan10(): void
     {
         self::expectException(InvalidArgumentException::class);
-        self::expectExceptionMessage('Invalid argument [name]');
+        self::expectExceptionMessage('Value must be min [2] and max [10] characters');
 
         $dto = CreateCustomerInputDTO::create(
-            'ABCDEABCDEA',
+            'ABCDEABCDEAABCDEABCDEA',
             self::VALUES['address'],
             self::VALUES['age'],
             self::VALUES['employeeId']
@@ -84,7 +82,5 @@ class CreateCustomerInputDTOTest extends TestCase
             17,
             self::VALUES['employeeId']
         );
-
     }
-
 }

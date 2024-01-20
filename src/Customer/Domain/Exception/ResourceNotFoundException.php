@@ -8,5 +8,4 @@ class ResourceNotFoundException extends \DomainException
     {
         return new static(\sprintf('Resource of type [%s] with ID [%s] not found', $class, $id));
     }
-
 }

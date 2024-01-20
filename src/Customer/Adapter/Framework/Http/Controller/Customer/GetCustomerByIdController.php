@@ -20,5 +20,4 @@ class GetCustomerByIdController
 
         return new JsonResponse($responseDTO);
     }
-
 }

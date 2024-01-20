@@ -9,10 +9,10 @@ class GetCustomerByIdInputDTO
     use AssertNotNullTrait;
 
     private const ARGS = ['id'];
+
     public function __construct(
         public readonly ?string $id
-    )
-    {
+    ) {
         $this->assertNotNull(self::ARGS, [$id]);
     }
 
@@ -20,5 +20,4 @@ class GetCustomerByIdInputDTO
     {
         return new static($id);
     }
-
 }

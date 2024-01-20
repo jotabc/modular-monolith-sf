@@ -1,5 +1,5 @@
 customer:
-    resource: 'routes/customer.yaml'
+    resource: '../src/Customer/Adapter/Framework/Config/Route/customer.yaml'
     prefix: 'customer'
     
 employee:

@@ -13,12 +13,12 @@ class RequestTransformer
     private const METHODS_TO_DECODE = [
         Request::METHOD_POST,
         Request::METHOD_PUT,
-        Request::METHOD_PATCH
+        Request::METHOD_PATCH,
     ];
 
     public function transform(Request $request): void
     {
-        if(self::ALLOWED_CONTENT_TYPE !== $request->headers->get('Content-Type')) {
+        if (self::ALLOWED_CONTENT_TYPE !== $request->headers->get('Content-Type')) {
             throw InvalidArgumentException::createFromMessage(\sprintf('[%s] is the only Content-Type allowed', self::ALLOWED_CONTENT_TYPE));
         }
 
@@ -29,7 +29,5 @@ class RequestTransformer
                 throw InvalidArgumentException::createFromMessage('Invalid JSON payload');
             }
         }
-
     }
-
 }

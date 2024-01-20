@@ -57,13 +57,19 @@
     private array products;
     public function products(): iterable
 
+  !!! Cake Architecture !!!.- Es un arquitectura de software muy sencilla implementadas como su nombre los dice
+    por capas, donde tenemos las sigs:
+      - Capa de de entrada de nuestra app es decir, (Controllers).
+      - Capa donde se almacenan servicios, eventos, Listeners o todo lo relacionado con la lógica de nuestro negocio
+      - Capa de datos Donde tenemos principlamente repositorios que van a leer y escibir del DB.
+
+
+    Es una arquitecura muy sencilla que nos sirve de mucho para poder estructurar nuestro código de una mejor manera,
+    muy simple de usarlo.
+
 
 
 NOTA.- Cuando es un payload de tipo
     - POST, PUT O PATCH se recibe de "request" $request->request->get('id');
     - GET se recibe de "attributes" => $request->attributes->get('id');
     - QUERY PARAM(?name=juan) se recibe de "query" => $request->query->get('id');
-
-
-
-

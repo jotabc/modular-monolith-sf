@@ -16,13 +16,12 @@ trait AssertNotNullTrait
     // esto devuelve un array con los valores que recibe la función en este caso name, address, age y employeeID. [0: 'name', 1: 'Peter', 2: 30, 3: 'string_exmaple'] devuelve el valor.
     public function assertNotNull(array $args, array $values): void
     {
-
         // array_combine combina 2 arrays, el primer array los pone como keys, y el segundo array el valor.
         // ejm $values = ['name' => 'Peter', 'address' => 'string_exmaple', 'age' => 30, 'employeeId' => 'string_exmaple'];
         $values = \array_combine($args, $values);
         $emptyValues = [];
 
-        foreach($values as $key => $value) {
+        foreach ($values as $key => $value) {
             if (\is_null($value)) {
                 $emptyValues[] = $key;
             }
@@ -31,6 +30,5 @@ trait AssertNotNullTrait
         if (!empty($emptyValues)) {
             throw InvalidArgumentException::createFromArray($emptyValues);
         }
-
     }
 }
