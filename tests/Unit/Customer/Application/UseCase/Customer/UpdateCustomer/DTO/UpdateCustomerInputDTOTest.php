@@ -9,10 +9,11 @@ class UpdateCustomerInputDTOTest extends TestCase
 {
 
     private const DATA = [
-        'id' => '5fc0e495-c74b-40a7-815d-0d7807b59041', //todo
+        'id' => '5fc0e495-c74b-40a7-815d-0d7807b59041',
         'name' => 'Peter',
         'address' => 'Fake street 123',
-        'age' => 30
+        'age' => 30,
+        'keys' => []
     ];
 
     public function testCreate(): void
@@ -21,7 +22,8 @@ class UpdateCustomerInputDTOTest extends TestCase
             self::DATA['id'],
             self::DATA['name'],
             self::DATA['address'],
-            self::DATA['age']
+            self::DATA['age'],
+            self::DATA['keys']
         );
 
         $this->assertInstanceOf(UpdateCustomerInputDTO::class, $inputDto);
@@ -40,19 +42,8 @@ class UpdateCustomerInputDTOTest extends TestCase
             null,
             self::DATA['name'],
             self::DATA['address'],
-            self::DATA['age']
-        );
-    }
-
-    public function testUpdateWithNullAge(): void
-    {
-        self::expectException(\InvalidArgumentException::class);
-
-        UpdateCustomerInputDTO::create(
-            self::DATA['id'],
-            self::DATA['name'],
-            self::DATA['address'],
-            null
+            self::DATA['age'],
+            self::DATA['keys']
         );
     }
 
@@ -64,7 +55,8 @@ class UpdateCustomerInputDTOTest extends TestCase
             self::DATA['id'],
             self::DATA['name'],
             self::DATA['address'],
-            10
+            10,
+            self::DATA['keys']
         );
     }
 }

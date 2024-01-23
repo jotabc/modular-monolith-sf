@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit\Customer\Application\UseCase\Customer\GetCustomerById;
+namespace App\Tests\Unit\Customer\Application\UseCase\Customer\UpdateCustomer;
 
 use Customer\Application\UseCase\Customer\UpdateCustomer\DTO\UpdateCustomerInputDTO;
 use Customer\Application\UseCase\Customer\UpdateCustomer\DTO\UpdateCustomerOutputDTO;
@@ -23,7 +23,12 @@ class UpdateCustomerTest extends TestCase
     'id' => '5fc0e495-c74b-40a7-815d-0d7807b59041',
     'name' => 'Peter',
     'address' => 'Address 111',
-    'age' => 40
+    'age' => 40,
+    'keys' => [
+        'name',
+        'address',
+        'age'
+    ]
   ];
 
   private const EMPLOYEE_ID = '5fc0e495-c74b-40a7-815d-0d7807b59123';
@@ -44,7 +49,7 @@ class UpdateCustomerTest extends TestCase
       self::DATA_TO_UPDATE['name'],
       self::DATA_TO_UPDATE['address'],
       self::DATA_TO_UPDATE['age'],
-      self::EMPLOYEE_ID
+      self::DATA_TO_UPDATE['keys']
     );
   }
 

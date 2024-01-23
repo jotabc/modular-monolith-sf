@@ -8,6 +8,8 @@ use Customer\Domain\Repository\CustomerRepository;
 
 class UpdateCustomer
 {
+    private const SETTER_PREFIX = 'set';
+
     public function __construct(
         private readonly CustomerRepository $customerRepository
     ) {
@@ -17,9 +19,9 @@ class UpdateCustomer
     {
         $customer = $this->customerRepository->findOneByIdOrFail($dto->id);
 
-        $customer->setName($dto->name);
-        $customer->setAddress($dto->address);
-        $customer->setAge($dto->age);
+        foreach ($dto->paramsToUpdate as $param) {
+            $customer->{\sprintf('%s%s', self::SETTER_PREFIX, \ucfirst($param))}($dto->{$param});
+        }
 
         $this->customerRepository->save($customer);
 
