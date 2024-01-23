@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class CustomerControllerTestBase extends WebTestCase
 {
     protected const CREATE_CUSTOMER_ENDPOINT = '/customer/create';
+    protected const NON_EXISTING_CUSTOMER_ID = 'a695f3f4-8e57-4c8c-ab66-005a5939d4e6';
 
     protected static ?AbstractBrowser $client = null;
 

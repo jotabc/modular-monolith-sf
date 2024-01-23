@@ -9,4 +9,6 @@ interface CustomerRepository
     public function findOneByIdOrFail(string $id): Customer;
 
     public function save(Customer $customer): void;
+
+    public function remove(Customer $customer): void;
 }
