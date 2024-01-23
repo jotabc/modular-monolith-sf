@@ -73,3 +73,8 @@ NOTA.- Cuando es un payload de tipo
     - POST, PUT O PATCH se recibe de "request" $request->request->get('id');
     - GET se recibe de "attributes" => $request->attributes->get('id');
     - QUERY PARAM(?name=juan) se recibe de "query" => $request->query->get('id');
+
+    Forma manual de lanzar test:
+      - vendor/bin/simple-phpunit -c phpunit.xml.dist
+      - vendor/bin/simple-phpunit -c phpunit.xml.dist --filter testCustomerHealthCheck
+      - vendor/bin/simple-phpunit -c phpunit.xml.dist --filter HealthCheckControllerTest o con la clase pero este ejecutará to dos los test

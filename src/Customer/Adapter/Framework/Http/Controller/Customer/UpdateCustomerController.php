@@ -24,7 +24,8 @@ class UpdateCustomerController extends AbstractController
             $request->id,
             $request->name,
             $request->address,
-            $request->age
+            $request->age,
+            $request->keys
         );
 
         $responseDTO = $this->useCase->handle($inputDTO);
