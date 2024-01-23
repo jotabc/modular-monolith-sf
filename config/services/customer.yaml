@@ -13,3 +13,7 @@ services:
     Customer\Adapter\Framework\Http\Controller\:
         resource: '../../src/Customer/Adapter/Framework/Http/Controller'
         tags: [ name: controller.service_arguments ]
+        
+    Customer\Adapter\Framework\Listener\JsonTransformerExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 100 }
