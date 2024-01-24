@@ -34,4 +34,10 @@ class DoctrineCustomerRepository implements CustomerRepository
         $this->manager->persist($customer);
         $this->manager->flush();
     }
+
+    public function remove(Customer $customer): void
+    {
+        $this->manager->remove($customer);
+        $this->manager->flush();
+    }
 }
