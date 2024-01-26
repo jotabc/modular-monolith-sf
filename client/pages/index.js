@@ -1,7 +1,28 @@
-import { Button, Col, Container, Form, Row } from 'react-bootstrap'
+import { useState } from 'react'
+import {
+  Flex,
+  Heading,
+  Input,
+  Button,
+  InputGroup,
+  Stack,
+  InputLeftElement,
+  chakra,
+  Box,
+  Link,
+  Avatar,
+  FormControl,
+  FormHelperText,
+  InputRightElement,
+  Text,
+} from '@chakra-ui/react'
+import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+
+const CFaUserAlt = chakra(FaUserAlt)
+const CFaLock = chakra(FaLock)
 
 export default function Home() {
   const validationSchema = yup.object().shape({
@@ -23,61 +44,103 @@ export default function Home() {
     // TODO api call to Google OAuth
   }
 
+  const [showPassword, setShowPassword] = useState(false)
+
+  const handleShowClick = () => setShowPassword(!showPassword)
+
   return (
-    <Container className={'mt-5'} fluid>
-      <Row className={'justify-content-center'}>
-        <Col md={4}>
-          <h1 className={'mb-3'}>
-            <Form onSubmit={handleSubmit(onSubmitForm)}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Controller
-                  control={control}
-                  name="email"
-                  render={({ field: { onChange, value, ref } }) => (
-                    <Form.Control
-                      onChange={onChange}
-                      value={value}
-                      ref={ref}
-                      placeholder="Enter email"
-                      type="email"
-                      isValid={errors.email}
-                    />
-                  )}
-                />
-                <Form.Text className="text-danger">
-                  {errors.email?.message}
-                </Form.Text>
-              </Form.Group>
+    <Flex
+      flexDirection="column"
+      width="100wh"
+      height="100vh"
+      backgroundColor="gray.200"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Stack
+        flexDir="column"
+        mb="2"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Avatar bg="teal.500" />
+        <Heading color="teal.400">Car - Rental</Heading>
+        <Box minW={{ base: '90%', md: '468px' }}>
+          <form onSubmit={handleSubmit(onSubmitForm)}>
+            <Stack
+              spacing={4}
+              p="1rem"
+              backgroundColor="whiteAlpha.900"
+              boxShadow="md"
+            >
+              <FormControl>
+                <InputGroup>
+                  <InputLeftElement pointerEvents="none">
+                    <CFaUserAlt color="gray.300" />
+                  </InputLeftElement>
+                  <Controller
+                    control={control}
+                    name="email"
+                    render={({ field: { onChange, value, ref } }) => (
+                      <Input
+                        type="email"
+                        placeholder="Email address"
+                        onChange={onChange}
+                        value={value}
+                        ref={ref}
+                      />
+                    )}
+                  />
+                </InputGroup>
+                <Text fontSize="sm" color="red.500">
+                  {errors?.email?.message}
+                </Text>
+              </FormControl>
 
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Controller
-                  control={control}
-                  name="password"
-                  render={({ field: { onChange, value, ref } }) => (
-                    <Form.Control
-                      onChange={onChange}
-                      value={value}
-                      ref={ref}
-                      placeholder="Password"
-                      isValid={errors.password}
-                      type="password"
-                    />
-                  )}
-                />
-                <Form.Text className="text-danger">
-                  {errors.password?.message}
-                </Form.Text>
-              </Form.Group>
+              <FormControl>
+                <InputGroup>
+                  <InputLeftElement pointerEvents="none" color="gray.300">
+                    <CFaLock color="gray.300" />
+                  </InputLeftElement>
 
-              <Button variant="primary" type="submit">
+                  <Controller
+                    control={control}
+                    name="password"
+                    render={({ field: { onChange, value, ref } }) => (
+                      <Input
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="Password"
+                        onChange={onChange}
+                        value={value}
+                        ref={ref}
+                      />
+                    )}
+                  />
+
+                  <InputRightElement width="4.5rem">
+                    <Button h="1.75rem" size="sm" onClick={handleShowClick}>
+                      {showPassword ? 'Hide' : 'Show'}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+                <Text fontSize="sm" color="red.500">
+                  {errors?.password?.message}
+                </Text>
+              </FormControl>
+
+              <Button
+                borderRadius={0}
+                type="submit"
+                variant="solid"
+                colorScheme="teal"
+                width="full"
+              >
                 Login
               </Button>
-            </Form>
-          </h1>
-        </Col>
-      </Row>
-    </Container>
+            </Stack>
+          </form>
+        </Box>
+      </Stack>
+    </Flex>
   )
 }
