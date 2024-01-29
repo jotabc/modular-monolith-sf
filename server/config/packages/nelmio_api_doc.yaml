@@ -7,8 +7,8 @@ nelmio_api_doc:
         default:
             path_patterns: [ ^/api(?!/doc$) ] # Accepts routes under /api except /api/doc
         customer:
-            path_patterns: [ ^/customer ]
+            path_patterns: [ ^/api/customer ]
         employee:
-            path_patterns: [ ^/employee ]
-        rent:
-            path_patterns: [ ^/rent ]
+            path_patterns: [ ^/api/employee ]
+        rental:
+            path_patterns: [ ^/api/rental ]
