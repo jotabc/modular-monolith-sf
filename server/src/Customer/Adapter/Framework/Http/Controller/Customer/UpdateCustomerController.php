@@ -10,7 +10,11 @@ use Customer\Application\UseCase\Customer\UpdateCustomer\UpdateCustomer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Nelmio\ApiDocBundle\Annotation as Nelmio;
+use OpenApi\Attributes as OA;
 
+#[Nelmio\Areas(['customer'])]
+#[OA\Tag('Customer')]
 class UpdateCustomerController extends AbstractController
 {
     public function __construct(private readonly UpdateCustomer $useCase)

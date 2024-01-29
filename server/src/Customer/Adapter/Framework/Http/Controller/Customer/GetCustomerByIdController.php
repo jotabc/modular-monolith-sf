@@ -7,7 +7,11 @@ use Customer\Application\UseCase\Customer\GetCustomerById\DTO\GetCustomerByIdInp
 use Customer\Application\UseCase\Customer\GetCustomerById\GetCustomerById;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Nelmio\ApiDocBundle\Annotation as Nelmio;
+use OpenApi\Attributes as OA;
 
+#[Nelmio\Areas(['customer'])]
+#[OA\Tag('Customer')]
 class GetCustomerByIdController
 {
     public function __construct(private readonly GetCustomerById $useCase)

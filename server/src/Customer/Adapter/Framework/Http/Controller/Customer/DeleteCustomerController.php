@@ -9,7 +9,11 @@ use Customer\Application\UseCase\Customer\DeleteCustomer\DeleteCustomer;
 use Customer\Application\UseCase\Customer\DeleteCustomer\DTO\DeleteCustomerInputDTO;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Nelmio\ApiDocBundle\Annotation as Nelmio;
+use OpenApi\Attributes as OA;
 
+#[Nelmio\Areas(['customer'])]
+#[OA\Tag('Customer')]
 class DeleteCustomerController
 {
     public function __construct(

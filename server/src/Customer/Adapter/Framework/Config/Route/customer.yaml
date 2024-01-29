@@ -8,7 +8,6 @@ get_customer_by_id:
     controller: Customer\Adapter\Framework\Http\Controller\Customer\GetCustomerByIdController
     methods: [ GET ]
 
-    
 create_customer:
     path:  /create
     controller: Customer\Adapter\Framework\Http\Controller\Customer\CreateCustomerController

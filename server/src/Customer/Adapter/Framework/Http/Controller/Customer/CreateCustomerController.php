@@ -7,7 +7,11 @@ use Customer\Application\UseCase\Customer\CreateCustomer\CreateCustomer;
 use Customer\Application\UseCase\Customer\CreateCustomer\DTO\CreateCustomerInputDTO;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Nelmio\ApiDocBundle\Annotation as Nelmio;
+use OpenApi\Attributes as OA;
 
+#[Nelmio\Areas(['customer'])]
+#[OA\Tag('Customer')]
 class CreateCustomerController
 {
     // inyectamos el caso de uso de application, que infraestructura conozca de
