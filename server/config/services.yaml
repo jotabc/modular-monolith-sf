@@ -2,4 +2,4 @@
 imports:
     - { resource: 'services/employee.yaml' }
     - { resource: 'services/customer.yaml' }
-    - { resource: 'services/customer.yaml' }
+    - { resource: 'services/rental.yaml' }

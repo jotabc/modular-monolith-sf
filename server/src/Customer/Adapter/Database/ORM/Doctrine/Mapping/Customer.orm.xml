@@ -5,6 +5,7 @@
         <id name="id" type="string" length="36" />
 
         <field name="name" length="50" />
+        <field name="email" length="100" />
         <field name="address" length="100" />
         <field name="age" type="smallint" />
         <field name="employeeId" column="employee_id" length="36" />

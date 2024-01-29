@@ -20,6 +20,7 @@ class CreateCustomerInputDTO
 
     private function __construct(
         public readonly ?string $name,
+        public readonly ?string $email,
         public readonly ?string $address,
         public readonly ?int $age,
         public readonly ?string $employeeId
@@ -33,8 +34,8 @@ class CreateCustomerInputDTO
         $this->assertMinimumAge($age, Customer::MINIMUM_AGE);
     }
 
-    public static function create(?string $name, ?string $address, ?int $age, ?string $employeeId): self
+    public static function create(?string $name, ?string $email, ?string $address, ?int $age, ?string $employeeId): self
     {
-        return new static($name, $address, $age, $employeeId);
+        return new static($name, $email,$address, $age, $employeeId);
     }
 }
