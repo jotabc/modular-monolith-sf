@@ -1,11 +1,11 @@
 <?php
 
-namespace Rent\Repository;
+namespace Rental\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
-use Rent\Entity\Rent;
+use Rental\Entity\Rental;
 
 class DoctrineRentRepository implements RentRepository
 {
@@ -14,11 +14,11 @@ class DoctrineRentRepository implements RentRepository
 
     public function __construct(ManagerRegistry $managerRegistry)
     {
-        $this->repository = new ServiceEntityRepository($managerRegistry, Rent::class);
+        $this->repository = new ServiceEntityRepository($managerRegistry, Rental::class);
         $this->manager = $managerRegistry->getManager();
     }
 
-    public function save(Rent $rent): void
+    public function save(Rental $rent): void
     {
         $this->manager->persist($rent);
         $this->manager->flush();

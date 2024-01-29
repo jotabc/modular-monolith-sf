@@ -40,9 +40,9 @@ doctrine:
                     Rent:
                         is_bundle: false
                         type: xml
-                        dir: '%kernel.project_dir%/config/orm/mapping/rent'
-                        prefix: 'Rent\Entity'
-                        alias: Rent
+                        dir: '%kernel.project_dir%/config/orm/mapping/rental'
+                        prefix: 'Rental\Entity'
+                        alias: Rental
 
 when@test:
     doctrine:

@@ -1,8 +1,8 @@
 <?php
 
-namespace Rent\Entity;
+namespace Rental\Entity;
 
-class Rent
+class Rental
 {
     public function __construct(
         private readonly string $id,

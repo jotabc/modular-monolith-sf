@@ -1,6 +1,6 @@
 <?php
 
-namespace Rent\Entity;
+namespace Rental\Entity;
 
 class Car
 {

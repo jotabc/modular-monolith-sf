@@ -3,6 +3,6 @@ services:
         autowire:      true
         autoconfigure: true
         
-    Rent\Controller\:
-        resource: '../../src/Rent/Controller'
+    Rental\Controller\:
+        resource: '../../src/Rental/Controller'
         tags: [ name: controller.service_arguments ]
