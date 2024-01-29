@@ -7,11 +7,10 @@ use Customer\Application\UseCase\Customer\CreateCustomer\CreateCustomer;
 use Customer\Application\UseCase\Customer\CreateCustomer\DTO\CreateCustomerInputDTO;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Nelmio\ApiDocBundle\Annotation as Nelmio;
 use OpenApi\Attributes as OA;
+use Symfony\Component\Routing\Annotation\Route;
 
-#[Nelmio\Areas(['customer'])]
-#[OA\Tag('Customer')]
+#[OA\Tag(name: 'Customers')]
 class CreateCustomerController
 {
     // inyectamos el caso de uso de application, que infraestructura conozca de
@@ -21,6 +20,7 @@ class CreateCustomerController
     {
     }
 
+    #[Route('', name: 'create_customer', methods: ['POST'])]
     public function __invoke(CreateCustomerRequestDTO $request): Response
     {
         $responseDto = $this->createCustomer->handle(CreateCustomerInputDTO::create($request->name, $request->address, $request->age, $request->employeeId));

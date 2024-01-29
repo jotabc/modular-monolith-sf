@@ -9,11 +9,10 @@ use Customer\Application\UseCase\Customer\DeleteCustomer\DeleteCustomer;
 use Customer\Application\UseCase\Customer\DeleteCustomer\DTO\DeleteCustomerInputDTO;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Nelmio\ApiDocBundle\Annotation as Nelmio;
 use OpenApi\Attributes as OA;
+use Symfony\Component\Routing\Annotation\Route;
 
-#[Nelmio\Areas(['customer'])]
-#[OA\Tag('Customer')]
+#[OA\Tag(name: 'Customers')]
 class DeleteCustomerController
 {
     public function __construct(
@@ -21,6 +20,7 @@ class DeleteCustomerController
     ) {
     }
 
+    #[Route('/{id}', name: 'delete_customer', methods: ['DELETE'])]
     public function __invoke(DeleteCustomerRequestDTO $request): Response
     {
         $this->useCase->handle(DeleteCustomerInputDTO::create($request->id));

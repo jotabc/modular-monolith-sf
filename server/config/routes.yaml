@@ -1,11 +1,7 @@
-customer:
-    resource: '../src/Customer/Adapter/Framework/Config/Route/customer.yaml'
-    prefix: 'api/customer'
-    
 employee:
     resource: 'routes/employee.yaml'
     prefix: 'api/employee'
     
 rental:
-    resource: 'routes/rent.yaml'
+    resource: 'routes/rental.yaml'
     prefix: 'api/rental'
