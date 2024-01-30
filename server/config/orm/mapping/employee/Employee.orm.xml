@@ -5,5 +5,7 @@
         <id name="id" type="string" length="36" />
 
         <field name="name" length="50" />
+        <field name="email" length="100" nullable="true" />
+        <field name="password" length="250" nullable="true" />
     </entity>
 </doctrine-mapping>

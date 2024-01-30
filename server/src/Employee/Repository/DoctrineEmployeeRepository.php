@@ -15,7 +15,7 @@ class DoctrineEmployeeRepository implements EmployeeRepository
     public function __construct(ManagerRegistry $managerRegistry)
     {
         $this->repository = new ServiceEntityRepository($managerRegistry, Employee::class);
-        $this->manager = $managerRegistry->getManager();
+        $this->manager = $managerRegistry->getManager('employee_em');
     }
 
     public function save(Employee $employee): void
