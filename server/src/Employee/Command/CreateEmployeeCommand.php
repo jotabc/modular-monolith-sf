@@ -3,11 +3,18 @@
 namespace Employee\Command;
 
 use Employee\Service\CreateEmployeeService;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(
+    name: 'app:employee:create',
+    description: 'Create new employee in the system',
+    aliases: ['app:add:employee'],
+    hidden: false
+)]
 class CreateEmployeeCommand extends Command
 {
     public function __construct(
@@ -19,8 +26,6 @@ class CreateEmployeeCommand extends Command
     public function configure(): void
     {
         $this
-            ->setName('app:employee:create')
-            ->setDescription('Create new employee in the system')
             ->addArgument('name', InputArgument::REQUIRED, 'Employee name')
             ->addArgument('email', InputArgument::REQUIRED, 'Employee email')
             ->addArgument('password', InputArgument::REQUIRED, 'Employee password');
