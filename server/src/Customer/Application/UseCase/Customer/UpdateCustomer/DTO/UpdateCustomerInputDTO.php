@@ -19,6 +19,7 @@ class UpdateCustomerInputDTO
     private function __construct(
         public readonly ?string $id,
         public readonly ?string $name,
+        public readonly ?string $email,
         public readonly ?string $address,
         public readonly ?int $age,
         public readonly array $paramsToUpdate
@@ -37,10 +38,11 @@ class UpdateCustomerInputDTO
     public static function create(
         ?string $id,
         ?string $name,
+        ?string $email,
         ?string $address,
         ?int $age,
         array $paramsToUpdate
     ): self {
-        return new static($id, $name, $address, $age, $paramsToUpdate);
+        return new static($id, $name, $email, $address, $age, $paramsToUpdate);
     }
 }

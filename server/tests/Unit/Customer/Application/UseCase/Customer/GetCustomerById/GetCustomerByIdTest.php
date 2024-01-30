@@ -16,6 +16,7 @@ class GetCustomerByIdTest extends TestCase
     private const CUSTOMER_DATA = [
         'id' => '644234a1-8a41-4d40-9770-f4c9fa56a0a9',
         'name' => 'Peter',
+        'email' => 'peter@api.com',
         'address' => 'Fake street 123',
         'age' => 30,
         'employeeId' => '644234a1-8a41-4d40-9770-f4c9fa56a111'
@@ -41,6 +42,7 @@ class GetCustomerByIdTest extends TestCase
         $customer = Customer::create(
             self::CUSTOMER_DATA['id'],
             self::CUSTOMER_DATA['name'],
+            self::CUSTOMER_DATA['email'],
             self::CUSTOMER_DATA['address'],
             self::CUSTOMER_DATA['age'],
             self::CUSTOMER_DATA['employeeId']
@@ -57,6 +59,7 @@ class GetCustomerByIdTest extends TestCase
         self::assertInstanceOf(GetCustomerByIdOutputDTO::class, $responseDTO);
         self::assertEquals(self::CUSTOMER_DATA['id'], $responseDTO->id);
         self::assertEquals(self::CUSTOMER_DATA['name'], $responseDTO->name);
+        self::assertEquals(self::CUSTOMER_DATA['email'], $responseDTO->email);
         self::assertEquals(self::CUSTOMER_DATA['address'], $responseDTO->address);
         self::assertEquals(self::CUSTOMER_DATA['age'], $responseDTO->age);
         self::assertEquals(self::CUSTOMER_DATA['employeeId'], $responseDTO->employeeId);

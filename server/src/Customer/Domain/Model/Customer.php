@@ -42,7 +42,7 @@ class Customer
         $this->name = $name;
     }
 
-    public function getEmail(): ?string
+    public function email(): ?string
     {
         return $this->email;
     }

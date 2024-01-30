@@ -25,6 +25,7 @@ class UpdateCustomerController extends AbstractController
         $inputDTO = UpdateCustomerInputDTO::create(
             $request->id,
             $request->name,
+            $request->email,
             $request->address,
             $request->age,
             $request->keys

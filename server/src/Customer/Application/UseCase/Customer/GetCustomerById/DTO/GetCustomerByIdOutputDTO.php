@@ -9,6 +9,7 @@ class GetCustomerByIdOutputDTO
     private function __construct(
         public readonly string $id,
         public readonly string $name,
+        public readonly string $email,
         public readonly string $address,
         public readonly int $age,
         public readonly string $employeeId
@@ -20,6 +21,7 @@ class GetCustomerByIdOutputDTO
         return new self(
             $customer->id(),
             $customer->name(),
+            $customer->email(),
             $customer->address(),
             $customer->age(),
             $customer->employeeId()

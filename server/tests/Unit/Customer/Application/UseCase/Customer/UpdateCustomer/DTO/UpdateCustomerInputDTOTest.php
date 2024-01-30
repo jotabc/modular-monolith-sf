@@ -11,6 +11,7 @@ class UpdateCustomerInputDTOTest extends TestCase
     private const DATA = [
         'id' => '5fc0e495-c74b-40a7-815d-0d7807b59041',
         'name' => 'Peter',
+        'email' => 'peter@api.com',
         'address' => 'Fake street 123',
         'age' => 30,
         'keys' => []
@@ -21,6 +22,7 @@ class UpdateCustomerInputDTOTest extends TestCase
         $inputDto = UpdateCustomerInputDTO::create(
             self::DATA['id'],
             self::DATA['name'],
+            self::DATA['email'],
             self::DATA['address'],
             self::DATA['age'],
             self::DATA['keys']
@@ -41,6 +43,7 @@ class UpdateCustomerInputDTOTest extends TestCase
         UpdateCustomerInputDTO::create(
             null,
             self::DATA['name'],
+            self::DATA['email'],
             self::DATA['address'],
             self::DATA['age'],
             self::DATA['keys']
@@ -54,6 +57,7 @@ class UpdateCustomerInputDTOTest extends TestCase
         UpdateCustomerInputDTO::create(
             self::DATA['id'],
             self::DATA['name'],
+            self::DATA['email'],
             self::DATA['address'],
             10,
             self::DATA['keys']
