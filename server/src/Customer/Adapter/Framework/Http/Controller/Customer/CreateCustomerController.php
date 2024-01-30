@@ -5,13 +5,14 @@ namespace Customer\Adapter\Framework\Http\Controller\Customer;
 use Customer\Adapter\Framework\Http\DTO\CreateCustomerRequestDTO;
 use Customer\Application\UseCase\Customer\CreateCustomer\CreateCustomer;
 use Customer\Application\UseCase\Customer\CreateCustomer\DTO\CreateCustomerInputDTO;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use OpenApi\Attributes as OA;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[OA\Tag(name: 'Customers')]
-class CreateCustomerController
+class CreateCustomerController extends AbstractController
 {
     // inyectamos el caso de uso de application, que infraestructura conozca de
     // application no pasa nada, porque infrastruture esta por fuera se comunica
