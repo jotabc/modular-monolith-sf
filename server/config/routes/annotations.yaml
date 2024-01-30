@@ -7,3 +7,15 @@ controllers:
     type: annotation
     prefix: /api/customers
     trailing_slash_on_root: false
+    
+employee_controllers:
+    resource: ../../src/Employee/Controller/
+    type: annotation
+    prefix: /api/employees
+    trailing_slash_on_root: false
+
+rental_controllers:
+    resource: ../../src/Rental/Controller/
+    type: annotation
+    prefix: /api/rentals
+    trailing_slash_on_root: false

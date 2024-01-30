@@ -5,18 +5,16 @@ namespace Employee\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Nelmio\ApiDocBundle\Annotation as Nelmio;
 use OpenApi\Attributes as OA;
+use Symfony\Component\Routing\Annotation\Route;
 
-#[Nelmio\Areas(['employee'])]
 #[OA\Tag('Employee')]
 
 class HealthCheckController extends AbstractController
 {
+    #[Route('/health-check', name: 'employee_health_check', methods: ['GET'], priority: 10)]
     public function __invoke(): Response
     {
-        return new JsonResponse([
-            'message' => 'Module Employee up and running',
-        ]);
+        return $this->json(['message' => 'Module Employee up and running!']);
     }
 }
