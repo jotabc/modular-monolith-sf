@@ -1,4 +1,4 @@
-FROM mysql:8.0.26
+FROM mariadb:10.9.2
 
 # cuando insertamos un sql dentro de docker-entrypoint-initdb.d
 # lo que va ha hacer de la imagen va a crer el contenedor

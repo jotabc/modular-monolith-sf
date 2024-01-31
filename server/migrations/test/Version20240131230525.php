@@ -7,7 +7,10 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-final class Version20240129200507 extends AbstractMigration
+/**
+ * Auto-generated Migration: Please modify to your needs!
+ */
+final class Version20240131230525 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -18,7 +21,7 @@ final class Version20240129200507 extends AbstractMigration
     {
         $this->addSql(
             <<<SQL
-                CREATE TABLE `customer_db`.`customer` (
+                CREATE TABLE `customer_db_test`.`customer` (
                     `id` CHAR(36) PRIMARY KEY NOT NULL,
                     `name` VARCHAR(50) DEFAULT NULL,
                     `email` VARCHAR(100) DEFAULT NULL UNIQUE,
@@ -26,20 +29,18 @@ final class Version20240129200507 extends AbstractMigration
                     `age` SMALLINT NOT NULL,
                     `employee_id` CHAR(36) NOT NULL,
                     INDEX IDX_customer_name (`name`),
-                    INDEX IDX_employee_id (`employee_id`),
-                    UNIQUE U_customer_email (`email`)
+                    INDEX IDX_employee_id (`employee_id`)
                 );
 
-                CREATE TABLE `employee_db`.`employee` (
+                CREATE TABLE `employee_db_test`.`employee` (
                     `id` CHAR(36) PRIMARY KEY NOT NULL,
                     `name` VARCHAR(50) DEFAULT NULL,
                     `email` VARCHAR(100) DEFAULT NULL UNIQUE,
                     `password` VARCHAR(250) DEFAULT NULL,
-                    INDEX IDX_employee_name (`name`),
-                    UNIQUE U_employee_email (`email`)
+                    INDEX IDX_employee_name (`name`)
                 );
 
-                CREATE TABLE `rental_db`.`car` (
+                CREATE TABLE `rental_db_test`.`car` (
                     `id` CHAR(36) PRIMARY KEY NOT NULL,
                     `brand` VARCHAR(50) DEFAULT NULL,
                     `model` VARCHAR(50) DEFAULT NULL,
@@ -49,7 +50,7 @@ final class Version20240129200507 extends AbstractMigration
                     INDEX IDX_car_color (`color`)
                 );
 
-                CREATE TABLE `rental_db`.`rental` (
+                CREATE TABLE `rental_db_test`.`rental` (
                     `id` CHAR(36) PRIMARY KEY NOT NULL,
                     `customer_id` CHAR(36) NOT NULL,
                     `employee_id` CHAR(36) NOT NULL,
@@ -69,10 +70,10 @@ final class Version20240129200507 extends AbstractMigration
     {
         $this->addSql(
             <<<SQL
-                DROP TABLE `rental_db`.`rental`;
-                DROP TABLE `rental_db`.`car`;
-                DROP TABLE `customer_db`.`customer`;
-                DROP TABLE `employee_db`.`employee`;
+                DROP TABLE `rental_db_test`.`rental`;
+                DROP TABLE `rental_db_test`.`car`;
+                DROP TABLE `customer_db_test`.`customer`;
+                DROP TABLE `employee_db_test`.`employee`;
             SQL
         );
     }
