@@ -11,8 +11,8 @@ class CreateEmployeeService
 {
 
     public function __construct(
-        private EmployeeRepository $employeeRepository,
-        private PasswordHasherInterface $passwordHasher
+        private readonly EmployeeRepository      $employeeRepository,
+        private readonly PasswordHasherInterface $passwordHasher
     )
     { }
 
