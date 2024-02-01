@@ -6,6 +6,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Employee\Entity\Employee;
+use Employee\Exception\DatabaseException;
+use Employee\Exception\ResourceNotFoundException;
 
 class DoctrineEmployeeRepository implements EmployeeRepository
 {
@@ -20,7 +22,31 @@ class DoctrineEmployeeRepository implements EmployeeRepository
 
     public function save(Employee $employee): void
     {
-        $this->manager->persist($employee);
-        $this->manager->flush();
+        try {
+            $this->manager->persist($employee);
+            $this->manager->flush();
+        } catch (\Exception $e) {
+            throw DatabaseException::createFromMessage($e->getMessage());
+        }
     }
+    public function remove(Employee $employee): void
+    {
+        try {
+            $this->manager->remove($employee);
+            $this->manager->flush();
+        } catch (\Exception $e) {
+            throw DatabaseException::createFromMessage($e->getMessage());
+        }
+    }
+
+    public function findOneByEmailOrFail(string $email): Employee
+    {
+        if (null === $employee = $this->repository->findOneBy(['email' => $email])) {
+            throw ResourceNotFoundException::createFromResourceAndProperty(Employee::class, $email);
+        }
+
+        return $employee;
+
+    }
+
 }
