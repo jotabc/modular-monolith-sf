@@ -49,4 +49,8 @@ class DoctrineEmployeeRepository implements EmployeeRepository
 
     }
 
+    public function findOneByEmail(string $email): ?Employee
+    {
+        return $this->repository->findOneBy(['email' => $email]);
+    }
 }

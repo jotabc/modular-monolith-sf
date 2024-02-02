@@ -2,20 +2,22 @@
 
 namespace Employee\Service;
 
+use Employee\Entity\Employee;
+use Employee\Exception\ResourceNotFoundException;
 use Employee\Repository\EmployeeRepository;
 
 class RemoveEmployeeService
 {
     public function __construct(
         private readonly EmployeeRepository $employeeRepository
-    )
-    { }
+    ) { }
 
     public function remove(string $email): void
     {
-        $employee = $this->employeeRepository->findOneByEmailOrFail($email);
+        if (null === $employee = $this->employeeRepository->findOneByEmail($email)) {
+            throw ResourceNotFoundException::createFromResourceAndProperty(Employee::class, $email);
+        }
+
         $this->employeeRepository->remove($employee);
     }
-
-
 }

@@ -3,6 +3,7 @@
 namespace Employee\Service;
 
 use Employee\Entity\Employee;
+use Employee\Exception\EmployeeAlreadyExistsException;
 use Employee\Repository\EmployeeRepository;
 use Employee\Service\Security\PasswordHasherInterface;
 use Symfony\Component\Uid\Uuid;
@@ -18,6 +19,18 @@ class CreateEmployeeService
 
     public function create(string $name, string $email, string $password): array
     {
+        /**
+         * CASE_0 Case for repository method with exception
+         */
+        // $this->employeeRepository->findOneByEmailOrFail($email);
+
+        /**
+         * CASE_1 Case for repository method without exception
+         */
+        if (null !== $this->employeeRepository->findOneByEmail($email)) {
+            throw EmployeeAlreadyExistsException::createFromEmail($email);
+        }
+
         $employee = new Employee(Uuid::v4()->toRfc4122(), $name, $email);
         $password = $this->passwordHasher->hashPasswordForUser($employee, $password);
         $employee->setPassword($password);

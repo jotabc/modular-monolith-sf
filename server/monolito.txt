@@ -78,3 +78,7 @@ NOTA.- Cuando es un payload de tipo
       - vendor/bin/simple-phpunit -c phpunit.xml.dist
       - vendor/bin/simple-phpunit -c phpunit.xml.dist --filter testCustomerHealthCheck
       - vendor/bin/simple-phpunit -c phpunit.xml.dist --filter HealthCheckControllerTest o con la clase pero este ejecutará to dos los test
+
+    Testing:
+      - Test unitarios para nuesta lógica de negocio.
+      - Test funcionales para comprobar las implementaciones de infraestructura están correctas.
