@@ -1,8 +1,8 @@
 services:
     _defaults:
-        autowire:      true
+        autowire: true
         autoconfigure: true
-        
-    Rental\Controller\:
-        resource: '../../src/Rental/Controller'
-        tags: [ name: controller.service_arguments ]
+    
+    Rental\:
+        resource: '../../src/Rental/'
+        exclude: '../../src/Rental/Entity/'
