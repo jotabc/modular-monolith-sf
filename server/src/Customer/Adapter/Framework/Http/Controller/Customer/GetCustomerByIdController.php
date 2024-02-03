@@ -5,10 +5,10 @@ namespace Customer\Adapter\Framework\Http\Controller\Customer;
 use Customer\Adapter\Framework\Http\DTO\GetCustomerByIdRequestDTO;
 use Customer\Application\UseCase\Customer\GetCustomerById\DTO\GetCustomerByIdInputDTO;
 use Customer\Application\UseCase\Customer\GetCustomerById\GetCustomerById;
+use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use OpenApi\Attributes as OA;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[OA\Tag(name: 'Customers')]

@@ -17,7 +17,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 class RemoveEmployeeCommand extends Command
 {
-
     public function __construct(
         private readonly RemoveEmployeeService $removeEmployeeService
     ) {

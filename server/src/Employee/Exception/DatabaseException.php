@@ -8,5 +8,4 @@ class DatabaseException extends \DomainException
     {
         return new self(\sprintf('Database error. Message: %s', $message));
     }
-
 }

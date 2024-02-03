@@ -7,10 +7,10 @@ namespace Customer\Adapter\Framework\Http\Controller\Customer;
 use Customer\Adapter\Framework\Http\DTO\UpdateCustomerRequestDTO;
 use Customer\Application\UseCase\Customer\UpdateCustomer\DTO\UpdateCustomerInputDTO;
 use Customer\Application\UseCase\Customer\UpdateCustomer\UpdateCustomer;
+use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Attributes as OA;
 
 #[OA\Tag(name: 'Customers')]
 class UpdateCustomerController extends AbstractController

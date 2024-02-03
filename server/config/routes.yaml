@@ -1,7 +1,3 @@
-employee:
-    resource: 'routes/employee.yaml'
-    prefix: 'api/employee'
-    
-rental:
-    resource: 'routes/rental.yaml'
-    prefix: 'api/rental'
+api_login_check:
+    path: /api/login_check
+    methods: [POST]

@@ -10,7 +10,8 @@ class RemoveEmployeeService
 {
     public function __construct(
         private readonly EmployeeRepository $employeeRepository
-    ) { }
+    ) {
+    }
 
     public function remove(string $email): void
     {

@@ -2,11 +2,10 @@
 
 namespace Customer\Adapter\Framework\Http\Controller;
 
+use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Nelmio\ApiDocBundle\Annotation as Nelmio;
-use OpenApi\Attributes as OA;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[OA\Tag(name: 'Customers')]

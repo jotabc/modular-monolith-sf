@@ -29,6 +29,7 @@ class DoctrineEmployeeRepository implements EmployeeRepository
             throw DatabaseException::createFromMessage($e->getMessage());
         }
     }
+
     public function remove(Employee $employee): void
     {
         try {
@@ -46,7 +47,6 @@ class DoctrineEmployeeRepository implements EmployeeRepository
         }
 
         return $employee;
-
     }
 
     public function findOneByEmail(string $email): ?Employee
