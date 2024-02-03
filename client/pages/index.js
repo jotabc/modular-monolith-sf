@@ -9,10 +9,8 @@ import {
   InputLeftElement,
   chakra,
   Box,
-  Link,
   Avatar,
   FormControl,
-  FormHelperText,
   InputRightElement,
   Text,
 } from '@chakra-ui/react'
@@ -20,11 +18,14 @@ import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { decodeToken, login } from './src/service/api/auth/auth.service'
+import { useRouter } from 'next/router'
 
 const CFaUserAlt = chakra(FaUserAlt)
 const CFaLock = chakra(FaLock)
 
 export default function Home() {
+  const router = useRouter()
   const validationSchema = yup.object().shape({
     email: yup.string().email('Invalid email').required('Email is mandatory'),
     password: yup
@@ -40,8 +41,15 @@ export default function Home() {
   } = useForm({ resolver: yupResolver(validationSchema) })
 
   const onSubmitForm = async (data) => {
-    console.log(data)
-    // TODO api call to Google OAuth
+    try {
+      const response = await login(data.email.trim(), data.password.trim())
+      const payload = decodeToken(response.data.token)
+      console.log(payload)
+
+      await router.push('/dashboard')
+    } catch (e) {
+      console.log({ e })
+    }
   }
 
   const [showPassword, setShowPassword] = useState(false)

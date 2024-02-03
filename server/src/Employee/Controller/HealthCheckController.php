@@ -2,14 +2,12 @@
 
 namespace Employee\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use OpenApi\Attributes as OA;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[OA\Tag('Employee')]
-
 class HealthCheckController extends AbstractController
 {
     #[Route('/health-check', name: 'employee_health_check', methods: ['GET'], priority: 10)]

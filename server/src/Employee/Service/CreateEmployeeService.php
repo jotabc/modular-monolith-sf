@@ -10,21 +10,20 @@ use Symfony\Component\Uid\Uuid;
 
 class CreateEmployeeService
 {
-
     public function __construct(
-        private readonly EmployeeRepository      $employeeRepository,
+        private readonly EmployeeRepository $employeeRepository,
         private readonly PasswordHasherInterface $passwordHasher
-    )
-    { }
+    ) {
+    }
 
     public function create(string $name, string $email, string $password): array
     {
-        /**
+        /*
          * CASE_0 Case for repository method with exception
          */
         // $this->employeeRepository->findOneByEmailOrFail($email);
 
-        /**
+        /*
          * CASE_1 Case for repository method without exception
          */
         if (null !== $this->employeeRepository->findOneByEmail($email)) {
@@ -43,5 +42,4 @@ class CreateEmployeeService
             'email' => $employee->getEmail(),
         ];
     }
-
 }
