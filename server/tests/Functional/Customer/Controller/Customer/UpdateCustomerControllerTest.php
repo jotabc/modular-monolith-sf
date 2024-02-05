@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UpdateCustomerControllerTest extends CustomerControllerTestBase
 {
-    private const ENDPOINT = '/customer/%s';
+    private const ENDPOINT = '/api/customers/%s';
 
     /**
      * @dataProvider updateCustomerDataProvider
@@ -20,7 +20,7 @@ class UpdateCustomerControllerTest extends CustomerControllerTestBase
         $customerId = $this->createCustomer();
 
         // update a customer
-        self::$client->request(
+        self::$admin->request(
           Request::METHOD_PATCH,
           sprintf(self::ENDPOINT, $customerId),
             [],
@@ -30,7 +30,7 @@ class UpdateCustomerControllerTest extends CustomerControllerTestBase
         );
 
         // checks
-        $response = self::$client->getResponse();
+        $response = self::$admin->getResponse();
         $responseData = $this->getResponseData($response);
 
         self::assertEquals(Response::HTTP_OK, $response->getStatusCode());
@@ -48,7 +48,7 @@ class UpdateCustomerControllerTest extends CustomerControllerTestBase
 
         $customerId = $this->createCustomer();
 
-        self::$client->request(
+        self::$admin->request(
             Request::METHOD_PATCH,
             \sprintf(self::ENDPOINT, $customerId),
             [],
@@ -57,7 +57,7 @@ class UpdateCustomerControllerTest extends CustomerControllerTestBase
             json_encode($payload)
         );
 
-        $response = self::$client->getResponse();
+        $response = self::$admin->getResponse();
 
         self::assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
     }
@@ -66,7 +66,7 @@ class UpdateCustomerControllerTest extends CustomerControllerTestBase
     {
         $payload = ['name' => 'Isdra'];
 
-        self::$client->request(
+        self::$admin->request(
             Request::METHOD_PATCH,
             sprintf(self::ENDPOINT, self::NON_EXISTING_CUSTOMER_ID),
             [],
@@ -75,7 +75,7 @@ class UpdateCustomerControllerTest extends CustomerControllerTestBase
             json_encode($payload)
         );
 
-        $response = self::$client->getResponse();
+        $response = self::$admin->getResponse();
         $responseData = $this->getResponseData($response);
 
         self::assertEquals(Response::HTTP_NOT_FOUND, $response->getStatusCode());
