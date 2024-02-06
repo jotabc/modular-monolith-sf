@@ -6,9 +6,9 @@ const axiosClient = axios.create({
   baseURL: FULL_API_PATH,
   timeout: 1000,
   headers: {
-    // 'Access-Control-Allow-Origin': '*',
-  }
-});
+    // 'Authorization': `Bearer`,
+  },
+})
 
 export const apiClient = {
   get: async (path, config) => {
@@ -25,5 +25,5 @@ export const apiClient = {
 
   remove: async (path) => {
     return axiosClient.delete(path)
-  }
+  },
 }

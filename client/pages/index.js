@@ -18,14 +18,17 @@ import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { decodeToken, login } from './src/service/api/auth/auth.service'
+import { decodeToken, login } from '../src/service/api/auth/auth.service'
 import { useRouter } from 'next/router'
+import {useDispatch} from 'react-redux'
+import {saveUser} from '../src/redux/reducer/auth'
 
 const CFaUserAlt = chakra(FaUserAlt)
 const CFaLock = chakra(FaLock)
 
 export default function Home() {
   const router = useRouter()
+  const dispatch = useDispatch()
   const validationSchema = yup.object().shape({
     email: yup.string().email('Invalid email').required('Email is mandatory'),
     password: yup
@@ -43,8 +46,10 @@ export default function Home() {
   const onSubmitForm = async (data) => {
     try {
       const response = await login(data.email.trim(), data.password.trim())
-      const payload = decodeToken(response.data.token)
-      console.log(payload)
+      const token = response.data.token
+      const payload = decodeToken(token)
+
+      dispatch(saveUser(token, payload))
 
       await router.push('/dashboard')
     } catch (e) {
