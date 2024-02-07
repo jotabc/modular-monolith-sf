@@ -21,7 +21,7 @@ final class Version20240130231947 extends AbstractMigration
     {
         $this->addSql(
             <<<SQL
-                CREATE TABLE `customer_db`.`customers` (
+                CREATE TABLE `customer_db`.`customer` (
                     `id` CHAR(36) PRIMARY KEY NOT NULL,
                     `name` VARCHAR(36) DEFAULT NULL,
                     `email` VARCHAR(36) DEFAULT NULL UNIQUE,
@@ -74,7 +74,7 @@ final class Version20240130231947 extends AbstractMigration
     {
         $this->addSql(
             <<<SQL
-                DROP TABLE `customer_db`.`customers`;
+                DROP TABLE `customer_db`.`customer`;
                 DROP TABLE `employee_db`.`employee`;
                 DROP TABLE `rental_db`.`car`;
                 DROP TABLE `rental_db`.`rental`;
