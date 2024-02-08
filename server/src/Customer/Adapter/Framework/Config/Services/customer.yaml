@@ -2,18 +2,16 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
-        
+    
     Customer\:
-        resource: '../../src/Customer/'
+        resource: '../../../../../Customer/'
         exclude:
-            - '../../src/Customer/Domain/Model/'
-            - '../../src/Kernel.php'
-            - '../../src/Tests/'
-
+            - '../../../../../Customer/Domain/Model/'
+    
     Customer\Adapter\Framework\Http\Controller\:
-        resource: '../../src/Customer/Adapter/Framework/Http/Controller'
-        tags: [ name: controller.service_arguments ]
-        
+        resource: '../../../../../Customer/Adapter/Framework/Http/Controller/'
+        tags: [ 'controller.service_arguments' ]
+    
     Customer\Adapter\Framework\Listener\JsonTransformerExceptionListener:
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 100 }
