@@ -1,9 +1,9 @@
 import { apiClient } from '../apiClient'
 
 const routes = {
-  base: 'customers',
+  base: '/employees',
 }
 
-export const searchCustomers = async (filters) => {
-  return apiClient.get(`${ routes.base }${ filters }`)
+export const searchCustomers = async (id, filters) => {
+  return apiClient.get(`${ routes.base }/${ id }/customers${ filters }`)
 }

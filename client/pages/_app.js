@@ -31,9 +31,6 @@ store.subscribe(
 
 function MyApp({ Component, pageProps }) {
   const token = useSelector((state) => state.auth.token)
-
-  console.log({ token })
-
   axios.defaults.headers.Authorization = `Bearer ${token}`
 
   return (

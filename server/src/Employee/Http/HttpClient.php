@@ -1,29 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Employee\Http;
 
+use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 
 final class HttpClient implements HttpClientInterface
 {
-    private ?\GuzzleHttp\Client $client = null;
+    private Client $client;
 
-    protected function getClient(): \GuzzleHttp\Client
+    public function __construct()
     {
-        if ($this->client){
-            return $this->client;
-        }
-
-        $client = new \GuzzleHttp\Client([
-            'base_uri' => 'http://localhost:1000/'
+        $this->client = new Client([
+            'base_uri' => 'http://localhost:1000/',
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ],
         ]);
-        $this->client = $client;
-
-        return $client;
     }
 
     public function get(string $uri, array $options = []): ResponseInterface
     {
-        return $this->getClient()->get($uri, $options);
+        return $this->client->get($uri, $options);
     }
 }

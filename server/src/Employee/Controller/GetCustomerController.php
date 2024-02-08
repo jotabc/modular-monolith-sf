@@ -16,7 +16,7 @@ class GetCustomerController extends AbstractController
     ) {
     }
 
-    #[Route('{id}/customers', name: 'get_employee_customers', methods: ['GET'])]
+    #[Route('/{id}/customers', name: 'get_employee_customers', methods: ['GET'])]
     public function __invoke(Request $request): Response
     {
         $employeeId = $request->attributes->get('id');
