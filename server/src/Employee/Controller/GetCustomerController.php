@@ -20,8 +20,8 @@ class GetCustomerController extends AbstractController
     public function __invoke(Request $request): Response
     {
         $employeeId = $request->attributes->get('id');
-        $page= $request->query->getInt('page');
-        $limit= $request->query->getInt('limit');
+        $page = $request->query->getInt('page');
+        $limit = $request->query->getInt('limit');
 
         // use the voter
         $this->denyAccessUnlessGranted(EmployeeVoter::GET_EMPLOYEE_CUSTOMERS, $employeeId);
