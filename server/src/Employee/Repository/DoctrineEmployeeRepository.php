@@ -49,6 +49,15 @@ class DoctrineEmployeeRepository implements EmployeeRepository
         return $employee;
     }
 
+    public function findOneByIdOrFail(string $id): Employee
+    {
+        if (null === $employee = $this->repository->find($id)) {
+            throw ResourceNotFoundException::createFromResourceAndId(Employee::class, $id);
+        }
+
+        return $employee;
+    }
+
     public function findOneByEmail(string $email): ?Employee
     {
         return $this->repository->findOneBy(['email' => $email]);

@@ -14,3 +14,10 @@ services:
     Employee\Service\Security\Listener\JWTCreatedListener:
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
+            
+#   Employee\Http\HttpClient:
+#       arguments:
+#           $client: 'GuzzleHttp\Client'
+
+#   Employee\Http\HttpClientInterface: '@Employee\Http\HttpClient'
+
