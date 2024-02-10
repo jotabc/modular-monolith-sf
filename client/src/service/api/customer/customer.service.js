@@ -1,7 +1,7 @@
 import { apiClient } from '../apiClient'
 
 const routes = {
-  base: '/employees',
+  base: 'employees',
 }
 
 export const searchCustomers = async (id, filters) => {
