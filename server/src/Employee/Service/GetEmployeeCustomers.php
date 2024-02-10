@@ -6,7 +6,7 @@ use Employee\Http\HttpClientInterface;
 
 class GetEmployeeCustomers
 {
-    private const SEARCH_CUSTOMERS_ENDPOINT = 'api/customers';
+    private const SEARCH_CUSTOMERS_ENDPOINT = '/api/customers';
 
     public function __construct(
         private readonly HttpClientInterface $httpClient,
@@ -17,11 +17,10 @@ class GetEmployeeCustomers
     {
         $response = $this->httpClient->get(
             \sprintf(
-                '%s?employeeId=%s&page=%s&limit=%s',
+                // '%s?employeeId=%s&page=%s&limit=%s',
+                '%s?employeeId=%s',
                 self::SEARCH_CUSTOMERS_ENDPOINT,
-                $employeeId,
-                $page,
-                $limit,
+                $employeeId
             )
         );
 

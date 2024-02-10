@@ -40,7 +40,7 @@ class DoctrineCustomerRepository implements CustomerRepository
 
         $qb = $this->repository->createQueryBuilder('customer');
         $qb
-            ->andWhere('customer.employee = :employeeId')
+            ->andWhere('customer.employeeId = :employeeId')
             ->setParameter('employeeId', $employeeId);
 
         $paginator = new Paginator($qb->getQuery());

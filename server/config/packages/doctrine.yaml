@@ -9,7 +9,6 @@ doctrine:
                 url: '%env(resolve:DATABASE_URL_EMPLOYEE)%'
             rental_connection:
                 url: '%env(resolve:DATABASE_URL_RENTAL)%'
-
     orm:
         default_entity_manager: employee_em
         entity_managers:
@@ -31,7 +30,6 @@ doctrine:
                         dir: '%kernel.project_dir%/config/orm/mapping/employee'
                         prefix: 'Employee\Entity'
                         alias: Employee
-                        
             rental_em:
                 connection: rental_connection
                 mappings:

@@ -1,11 +1,11 @@
 import { ChakraProvider } from '@chakra-ui/react'
-import axios from 'axios'
 import { combineReducers, legacy_createStore as createStore } from 'redux'
 import AuthReducer, { fromLocalStorage } from '../src/redux/reducer/auth'
 import { loadState, saveState } from '../src/service/storage/storage.service'
 import throttle from 'lodash/throttle'
 import { createWrapper } from 'next-redux-wrapper'
 import { Provider, useSelector } from 'react-redux'
+import { axiosClient } from '../src/service/api/apiClient'
 
 const rootReducer = combineReducers({
   auth: AuthReducer,
@@ -31,7 +31,7 @@ store.subscribe(
 
 function MyApp({ Component, pageProps }) {
   const token = useSelector((state) => state.auth.token)
-  axios.defaults.headers.Authorization = `Bearer ${token}`
+  axiosClient.defaults.headers.Authorization = `Bearer ${token}`
 
   return (
     <ChakraProvider>
