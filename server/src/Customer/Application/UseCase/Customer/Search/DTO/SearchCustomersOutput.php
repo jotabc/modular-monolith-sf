@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Customer\Application\UseCase\Customer\Search\DTO;
+namespace Customer\Application\UseCase\Customer\Search\DTO;
 
 use Customer\Adapter\Framework\Http\API\Response\PaginatedResponse;
 use Customer\Domain\Model\Customer;
