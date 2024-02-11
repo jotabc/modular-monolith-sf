@@ -10,8 +10,6 @@ RUN echo "StrictHostKeyChecking no" >> /home/appuser/.ssh/config
 RUN echo "export COLUMNS=300" >> /home/appuser/.bashrc
 RUN echo "alias sf=/appdata/www/bin/console" >> /home/appuser/.bashrc
 
-COPY php.ini /usr/local/etc/php/conf.d/docker-php-config.ini
-
 # Install packages and PHP extensions
 RUN apt-get update \
     && apt-get install -y git acl openssl openssh-client wget zip curl \
