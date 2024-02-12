@@ -141,8 +141,6 @@ nelmio_api_doc:
                                                     page: { type: number, example: 1 }
                                                     limit: { type: number, example: 10 }
                                                     hasNext: { type: boolean, example: true }
-                                                
-                                                
 
             ### RENTAL PATHS ###
             /api/rentals/health-check:
