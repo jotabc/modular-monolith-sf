@@ -84,6 +84,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.46",
+        "hautelook/alice-bundle": "^2.12",
         "phpunit/phpunit": "^10.5",
         "symfony/browser-kit": "5.4.*",
         "symfony/css-selector": "5.4.*",

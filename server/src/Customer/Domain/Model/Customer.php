@@ -12,7 +12,7 @@ class Customer
     public const NAME_MAX_LENGTH = 10;
     public const MINIMUM_AGE = 18;
 
-    private function __construct(
+    public function __construct(
         private readonly string $id,
         private ?string $name,
         private ?string $email,
