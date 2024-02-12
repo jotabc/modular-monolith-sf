@@ -23,7 +23,7 @@ final class Version20240131230525 extends AbstractMigration
             <<<SQL
                 CREATE TABLE `customer_db_test`.`customer` (
                     `id` CHAR(36) PRIMARY KEY NOT NULL,
-                    `name` VARCHAR(50) DEFAULT NULL,
+                    `name` VARCHAR(100) DEFAULT NULL,
                     `email` VARCHAR(100) DEFAULT NULL UNIQUE,
                     `address` VARCHAR(100) DEFAULT NULL,
                     `age` SMALLINT NOT NULL,

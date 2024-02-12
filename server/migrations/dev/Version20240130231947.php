@@ -23,9 +23,9 @@ final class Version20240130231947 extends AbstractMigration
             <<<SQL
                 CREATE TABLE `customer_db`.`customer` (
                     `id` CHAR(36) PRIMARY KEY NOT NULL,
-                    `name` VARCHAR(36) DEFAULT NULL,
-                    `email` VARCHAR(36) DEFAULT NULL UNIQUE,
-                    `address` VARCHAR(36) DEFAULT NULL,
+                    `name` VARCHAR(100) DEFAULT NULL,
+                    `email` VARCHAR(100) DEFAULT NULL UNIQUE,
+                    `address` VARCHAR(100) DEFAULT NULL,
                     `age` SMALLINT NOT NULL,
                     `employee_id` CHAR(36) NOT NULL,
                     INDEX IDX_customer_name (`name`),
