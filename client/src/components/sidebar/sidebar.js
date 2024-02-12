@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   IconButton,
   Avatar,
@@ -21,11 +23,37 @@ import {
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import { FiMenu, FiChevronDown } from 'react-icons/fi'
+import { useRouter } from 'next/router'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import { sideMenu } from '../../config/sideMenu'
+import { logout } from '../../redux/reducer/auth'
 
 export default function SidebarWithHeader({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const token = useSelector(state => state.auth.token)
+  const name = useSelector(state => state.auth.name)
+  const [username, setUsername] = useState('')
+
+  const handleLogout = async () => {
+    dispatch(logout())
+    await router.push('/')
+  }
+
+  useEffect(() => {
+    async function toLogin() {
+      await router.push('/')
+    }
+
+    if (undefined === token) {
+      toLogin()
+    }
+  }, [])
+
+  useEffect(() => {
+    setUsername(name)
+  }, [ username ])
 
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
@@ -49,8 +77,8 @@ export default function SidebarWithHeader({ children }) {
       {/* mobilenav */}
       <MobileNav
         onOpen={onOpen}
-        name=''
-        handleLogout={() => { }}
+        name={username}
+        handleLogout={handleLogout}
         colorMode=''
         toggleColorMode={() => { }}
       />
@@ -127,10 +155,7 @@ const NavItem = ({ icon, children, path, ...rest }) => {
 const MobileNav = ({
   onOpen,
   name,
-  handleLogout,
-  colorMode,
-  toggleColorMode,
-  ...rest
+  handleLogout
 }) => {
   return (
     <Flex
@@ -142,7 +167,6 @@ const MobileNav = ({
       borderBottomWidth="1px"
       borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
       justifyContent={{ base: 'space-between', md: 'flex-end' }}
-      {...rest}
     >
       <IconButton
         display={{ base: 'flex', md: 'none' }}
@@ -163,8 +187,8 @@ const MobileNav = ({
 
       <HStack spacing={{ base: '0', md: '6' }}>
         <Flex alignItems={'center'}>
-          <Button onClick={toggleColorMode} mr={5}>
-            {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+          <Button onClick={() => { }} mr={5}>
+            <MoonIcon />
           </Button>
           <Menu>
             <MenuButton

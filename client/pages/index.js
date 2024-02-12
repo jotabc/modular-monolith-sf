@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Flex,
   Heading,
@@ -13,6 +13,7 @@ import {
   FormControl,
   InputRightElement,
   Text,
+  useToast,
 } from '@chakra-ui/react'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { Controller, useForm } from 'react-hook-form'
@@ -20,7 +21,7 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { decodeToken, login } from '../src/service/api/auth/auth.service'
 import { useRouter } from 'next/router'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {saveUser} from '../src/redux/reducer/auth'
 
 const CFaUserAlt = chakra(FaUserAlt)
@@ -29,6 +30,9 @@ const CFaLock = chakra(FaLock)
 export default function Home() {
   const router = useRouter()
   const dispatch = useDispatch()
+  const token = useSelector( state => state.auth.token )
+  const toast = useToast()
+
   const validationSchema = yup.object().shape({
     email: yup.string().email('Invalid email').required('Email is mandatory'),
     password: yup
@@ -53,13 +57,29 @@ export default function Home() {
 
       await router.push('/dashboard')
     } catch (e) {
-      console.log({ e })
+      toast({
+        title: 'Invalid credentials',
+        description: "Invalid email or password. Please try again!",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
     }
   }
 
   const [showPassword, setShowPassword] = useState(false)
 
   const handleShowClick = () => setShowPassword(!showPassword)
+
+  useEffect( () => {
+    async function toDashboard() {
+      router.push('/dashboard')
+    }
+
+    if (undefined !== token) {
+      toDashboard()
+    }
+  }, [])
 
   return (
     <Flex

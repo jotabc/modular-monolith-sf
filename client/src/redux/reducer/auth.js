@@ -11,6 +11,7 @@ const AuthReducer = (state = initialState, action) => {
         ...state,
         id: action.payload.id,
         email: action.payload.username,
+        name: action.payload.name,
         token: action.token,
       }
 
@@ -19,6 +20,7 @@ const AuthReducer = (state = initialState, action) => {
         ...state,
         id: action.values.id,
         email: action.values.username,
+        name: action.values.name,
         token: action.values.token,
       }
 

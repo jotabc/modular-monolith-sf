@@ -4,25 +4,37 @@ import SidebarWithHeader from '../../src/components/sidebar/sidebar'
 import {useSelector} from 'react-redux'
 import {searchCustomers} from '../../src/service/api/customer/customer.service'
 import {useCallback, useEffect, useState} from 'react'
+import InfinityScroll from '../../src/common/infinityScroll'
 
 export default function Customers() {
   const id = useSelector( state => state.auth.id)
-  const [customers, setCustomers] = useState([{ id: '1', name:'Juan', address: 'Address 1'}])
+  const [customers, setCustomers] = useState([])
+  const [meta, setMeta] = useState({
+    page: 1,
+    limit: 10,
+    hasNext: false,
+    total: 0
+  })
   
-  const search = useCallback(async () => {
+  const search = useCallback(async (page = 1, limit = 30, loadMore = false) => {
     try {
-      const response = await searchCustomers(id, '?page=1&limit=10')
-      console.log(response.data)
+      const response = await searchCustomers(id, buildFilters(page, limit))
+      setCustomers(loadMore ? customers.concat(response.data.items) : response.data.items)
+      setMeta(response.data.meta)
       
     } catch (e) {
       console.error({ e })
     }
-  }, [id])
+  }, [id, customers])
+
+  const buildFilters = useCallback( (page, limit) => {
+    return `?page=${page}&limit=${limit}`
+  }, [])
   
   useEffect(() => {
     search()
       .then()
-  }, [customers, search])
+  }, [])
   
   return (
     <SidebarWithHeader>
@@ -40,7 +52,7 @@ export default function Customers() {
           <Tbody>
             {
               customers.map( customer => (
-                <Tr key={customer.id}>
+                <Tr key={ customer.id }>
                   <Td>{ customer.id }</Td>
                   <Td>{ customer.name }</Td>
                   <Td>{ customer.address }</Td>
@@ -50,6 +62,7 @@ export default function Customers() {
           </Tbody>
         </Table>
       </TableContainer>
+      <InfinityScroll meta={meta} collection={customers} search={search} />
     </SidebarWithHeader>
   )
 }
