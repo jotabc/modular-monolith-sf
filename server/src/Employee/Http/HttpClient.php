@@ -9,10 +9,10 @@ final class HttpClient implements HttpClientInterface
 {
     private Client $client;
 
-    public function __construct()
+    public function __construct(string $baseUrl)
     {
         $this->client = new Client([
-            'base_uri' => 'http://localhost:1000/',
+            'base_uri' => $baseUrl,
             'headers' => [
                 'Content-Type' => 'application/json',
             ],

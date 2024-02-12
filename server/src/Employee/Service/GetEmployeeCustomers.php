@@ -17,10 +17,11 @@ class GetEmployeeCustomers
     {
         $response = $this->httpClient->get(
             \sprintf(
-                // '%s?employeeId=%s&page=%s&limit=%s',
-                '%s?employeeId=%s',
+                '%s?employeeId=%s&page=%s&limit=%s',
                 self::SEARCH_CUSTOMERS_ENDPOINT,
-                $employeeId
+                $employeeId,
+                $page,
+                $limit
             )
         );
 
