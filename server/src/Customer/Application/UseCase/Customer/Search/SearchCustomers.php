@@ -2,8 +2,8 @@
 
 namespace Customer\Application\UseCase\Customer\Search;
 
-use Customer\Application\UseCase\Customer\Search\DTO\SearchCustomersOutput;
 use Customer\Adapter\Framework\Http\API\Filter\CustomerFilter;
+use Customer\Application\UseCase\Customer\Search\DTO\SearchCustomersOutput;
 use Customer\Domain\Repository\CustomerRepository;
 
 final class SearchCustomers

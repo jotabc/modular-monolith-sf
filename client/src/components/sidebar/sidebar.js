@@ -52,11 +52,13 @@ export default function SidebarWithHeader({ children }) {
     if (undefined === token) {
       toLogin()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
     setUsername(name)
-  }, [ username ])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [username])
 
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>

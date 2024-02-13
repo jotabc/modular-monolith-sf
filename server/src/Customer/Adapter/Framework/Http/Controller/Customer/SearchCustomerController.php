@@ -22,7 +22,10 @@ class SearchCustomerController extends AbstractController
         $filter = new CustomerFilter(
             $request->page,
             $request->limit,
-            $request->employeeId
+            $request->employeeId,
+            $request->sort,
+            $request->order,
+            $request->name,
         );
 
         $output = $this->useCase->execute($filter);

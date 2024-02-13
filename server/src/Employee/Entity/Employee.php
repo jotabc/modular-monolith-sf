@@ -68,10 +68,10 @@ class Employee implements UserInterface, PasswordAuthenticatedUserInterface
         // TODO: Implement eraseCredentials() method.
     }
 
-//    public function getUserIdentifier(): string
-//    {
-//        return $this->email;
-//    }
+    //    public function getUserIdentifier(): string
+    //    {
+    //        return $this->email;
+    //    }
 
     public function __call(string $name, array $arguments)
     {

@@ -37,11 +37,21 @@ class DoctrineCustomerRepository implements CustomerRepository
         $page = $filter->page;
         $limit = $filter->limit;
         $employeeId = $filter->employeeId;
+        $sort = $filter->sort;
+        $order = $filter->order;
+        $name = $filter->name;
 
         $qb = $this->repository->createQueryBuilder('customer');
+        $qb->orderBy(\sprintf('customer.%s', $sort), $order);
         $qb
             ->andWhere('customer.employeeId = :employeeId')
             ->setParameter('employeeId', $employeeId);
+
+        if (null !== $name) {
+            $qb
+                ->andWhere('customer.name LIKE :name')
+                ->setParameter('name', $name.'%');
+        }
 
         $paginator = new Paginator($qb->getQuery());
         $paginator->getQuery()
