@@ -4,7 +4,6 @@ namespace Customer\Adapter\Framework\Http\ArgumentResolver;
 
 use Customer\Adapter\Framework\Http\DTO\RequestDTO;
 use Customer\Adapter\Framework\Http\RequestTransformer\RequestTransformer;
-use ReflectionException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
@@ -17,7 +16,7 @@ class RequestArgumentResolver implements ArgumentValueResolverInterface
     }
 
     /**
-     * @throws ReflectionException
+     * @throws \ReflectionException
      */
     public function supports(Request $request, ArgumentMetadata $argument): bool
     {

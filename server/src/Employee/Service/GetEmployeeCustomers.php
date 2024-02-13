@@ -13,15 +13,24 @@ class GetEmployeeCustomers
     ) {
     }
 
-    public function execute(string $employeeId, int $page, int $limit): array
+    public function execute(string $employeeId, int $page, int $limit, string $sort, string $order, ?string $name): array
     {
+        $filter = '%s?employeeId=%s&page=%s&limit=%s&sort=%s&order=%s';
+
+        if (null !== $name) {
+            $filter .= '&name=%s';
+        }
+
         $response = $this->httpClient->get(
             \sprintf(
-                '%s?employeeId=%s&page=%s&limit=%s',
+                $filter,
                 self::SEARCH_CUSTOMERS_ENDPOINT,
                 $employeeId,
                 $page,
-                $limit
+                $limit,
+                $sort,
+                $order,
+                $name
             )
         );
 

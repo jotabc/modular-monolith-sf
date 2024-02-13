@@ -82,6 +82,7 @@ export default function Home() {
     if (undefined !== token) {
       toDashboard()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
