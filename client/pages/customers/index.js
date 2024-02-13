@@ -15,6 +15,10 @@ export default function Customers() {
     hasNext: false,
     total: 0
   })
+
+  const buildFilters = useCallback( (page, limit) => {
+    return `?page=${page}&limit=${limit}`
+  }, [])
   
   const search = useCallback(async (page = 1, limit = 30, loadMore = false) => {
     try {
@@ -26,10 +30,6 @@ export default function Customers() {
       console.error({ e })
     }
   }, [id, customers])
-
-  const buildFilters = useCallback( (page, limit) => {
-    return `?page=${page}&limit=${limit}`
-  }, [])
   
   useEffect(() => {
     search()

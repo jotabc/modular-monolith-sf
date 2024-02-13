@@ -20,6 +20,7 @@ import {
   MenuItem,
   MenuList,
   Button,
+  useColorMode,
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import { FiMenu, FiChevronDown } from 'react-icons/fi'
@@ -29,12 +30,14 @@ import { sideMenu } from '../../config/sideMenu'
 import { logout } from '../../redux/reducer/auth'
 
 export default function SidebarWithHeader({ children }) {
+  const [username, setUsername] = useState('')
+
+  const { colorMode, toggleColorMode } = useColorMode()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const router = useRouter()
   const dispatch = useDispatch()
   const token = useSelector(state => state.auth.token)
   const name = useSelector(state => state.auth.name)
-  const [username, setUsername] = useState('')
 
   const handleLogout = async () => {
     dispatch(logout())
@@ -79,8 +82,8 @@ export default function SidebarWithHeader({ children }) {
         onOpen={onOpen}
         name={username}
         handleLogout={handleLogout}
-        colorMode=''
-        toggleColorMode={() => { }}
+        colorMode={colorMode}
+        toggleColorMode={toggleColorMode}
       />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {children}
@@ -155,7 +158,9 @@ const NavItem = ({ icon, children, path, ...rest }) => {
 const MobileNav = ({
   onOpen,
   name,
-  handleLogout
+  handleLogout,
+  colorMode,
+  toggleColorMode
 }) => {
   return (
     <Flex
@@ -187,8 +192,8 @@ const MobileNav = ({
 
       <HStack spacing={{ base: '0', md: '6' }}>
         <Flex alignItems={'center'}>
-          <Button onClick={() => { }} mr={5}>
-            <MoonIcon />
+          <Button onClick={toggleColorMode} mr={5}>
+            { colorMode === 'ligth' ? <MoonIcon /> : <SunIcon /> }
           </Button>
           <Menu>
             <MenuButton

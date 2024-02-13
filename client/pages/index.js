@@ -14,6 +14,7 @@ import {
   InputRightElement,
   Text,
   useToast,
+  useColorMode,
 } from '@chakra-ui/react'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { Controller, useForm } from 'react-hook-form'
@@ -31,6 +32,8 @@ export default function Home() {
   const router = useRouter()
   const dispatch = useDispatch()
   const token = useSelector( state => state.auth.token )
+
+  const { colorMode, toggleColorMode } = useColorMode()
   const toast = useToast()
 
   const validationSchema = yup.object().shape({
@@ -80,6 +83,12 @@ export default function Home() {
       toDashboard()
     }
   }, [])
+
+  useEffect(() => {
+    if ('dark' === colorMode) {
+      toggleColorMode()
+    }
+  })
 
   return (
     <Flex
