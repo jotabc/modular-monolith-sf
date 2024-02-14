@@ -82,3 +82,25 @@ NOTA.- Cuando es un payload de tipo
     Testing:
       - Test unitarios para nuesta lógica de negocio.
       - Test funcionales para comprobar las implementaciones de infraestructura están correctas.
+
+
+!!! DEPLOY !!!.- En el sentido estricto do docker y sobre todo a al hora de ir a producción, seguramente
+  nos digan que es la idea es que un contendor tenga un solo servicio, osea un conetendor con apache
+  otra con php, otra con nuestra instancia de mysql y postgres y despues tener una red interna para
+  que se comuniquen entre ellos.
+
+  Aunque tengamos una applicación que usen 100 personas diariamente con un servidor de $8 o $10 y
+  un solo contendor de php y apache es más que suficiente.
+  
+  La imagen de php-apache ya trae configurado por defecto un directorio raiz donde esta va a 
+  estar alojado nuestro proyecto /var/www/html.
+  Cambiamos de fpm a apche por las sigs razones:
+    - Con fpm necesitamos otro contenedor que ejecute nginx el servidor web o incluso apache, con
+    apache vamos a tener un solo contendor que va a estar ejecutando php con nuestra app symfony
+    y va a tener un apache por encima escuchando peticiones.
+
+    - Con pache la ventaja es que podemos ir a producción con un solo contendor.
+    - Con fpm necesitariamos tener un conetendor para php, otra para apache o nginx y comunicarlos
+      atravéz de una red interna de docker esto complica más las cosas, o hacemos nosotros la
+      configuración de docker o vamos directamente con docker-compose.
+
