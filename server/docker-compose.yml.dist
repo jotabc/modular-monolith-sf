@@ -34,13 +34,13 @@ services:
             MYSQL_DATABASE: customer_db
             MYSQL_ROOT_PASSWORD: root
         volumes:
-            - modular-monolith-example-mysql-data:/var/lib/mysql
+            - ./mysql-data:/var/lib/mysql
         networks:
             - modular-monolith-example-network
         command: [ 'mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
 
 networks:
-  modular-monolith-example-network:
+    modular-monolith-example-network:
 
 volumes:
-  modular-monolith-example-mysql-data:
+    mysql-data:
