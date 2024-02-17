@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Employee\Service;
+namespace Employee\Service;
 
 use Employee\Http\HttpClientInterface;
 
