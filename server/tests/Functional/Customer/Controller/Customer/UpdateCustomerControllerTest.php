@@ -18,28 +18,26 @@ class UpdateCustomerControllerTest extends CustomerControllerTestBase
     {
         // create a customer
         $customerId = $this->createCustomer();
-
         // update a customer
         self::$admin->request(
-          Request::METHOD_PATCH,
-          sprintf(self::ENDPOINT, $customerId),
+            Request::METHOD_PATCH,
+            sprintf(self::ENDPOINT, $customerId),
             [],
             [],
             [],
             json_encode($payload)
         );
-
         // checks
         $response = self::$admin->getResponse();
         $responseData = $this->getResponseData($response);
 
         self::assertEquals(Response::HTTP_OK, $response->getStatusCode());
+
         $keys = \array_keys($payload);
 
         foreach ($keys as $key) {
             self::assertEquals($payload[$key], $responseData[$key]);
         }
-
     }
 
     public function testUpdateCustomerWithWrongValue(): void
@@ -48,14 +46,7 @@ class UpdateCustomerControllerTest extends CustomerControllerTestBase
 
         $customerId = $this->createCustomer();
 
-        self::$admin->request(
-            Request::METHOD_PATCH,
-            \sprintf(self::ENDPOINT, $customerId),
-            [],
-            [],
-            [],
-            json_encode($payload)
-        );
+        self::$admin->request(Request::METHOD_PATCH, \sprintf(self::ENDPOINT, $customerId), [], [], [], \json_encode($payload));
 
         $response = self::$admin->getResponse();
 
@@ -64,16 +55,11 @@ class UpdateCustomerControllerTest extends CustomerControllerTestBase
 
     public function testUpdateNonExistingCustomer(): void
     {
-        $payload = ['name' => 'Isdra'];
+        $payload = [
+            'name' => 'Brian',
+        ];
 
-        self::$admin->request(
-            Request::METHOD_PATCH,
-            sprintf(self::ENDPOINT, self::NON_EXISTING_CUSTOMER_ID),
-            [],
-            [],
-            [],
-            json_encode($payload)
-        );
+        self::$admin->request(Request::METHOD_PATCH, \sprintf(self::ENDPOINT, self::NON_EXISTING_CUSTOMER_ID), [], [], [], \json_encode($payload));
 
         $response = self::$admin->getResponse();
         $responseData = $this->getResponseData($response);
@@ -82,38 +68,37 @@ class UpdateCustomerControllerTest extends CustomerControllerTestBase
         self::assertEquals(ResourceNotFoundException::class, $responseData['class']);
     }
 
-
-    public static function updateCustomerDataProvider(): iterable
+    public function updateCustomerDataProvider(): iterable
     {
         /* DATA PROVIDER.- Los data provider es una funcionalidad de php unit
           que nos permite crear un set de datos al que se lo podemos pasar a un
           test para que con un solo test podamos probar diff casos de uso así
            evitamos repetir la misma lógica en varios sitios.
        */
-        /* yield 'Update name payload' => [
+
+        yield 'Update name payload' => [
             [
-                'name' => 'Brian'
-            ]
-        ];*/
+                'name' => 'Brian',
+            ],
+        ];
 
         yield 'Update address payload' => [
             [
-                'address' => 'New Address 111'
-            ]
+                'address' => 'New address 111',
+            ],
         ];
 
         yield 'Update name and address payload' => [
             [
                 'name' => 'Peter',
-                'address' => 'New Address 222'
-            ]
+                'address' => 'New address 222',
+            ],
         ];
 
         yield 'Update age payload' => [
             [
-                'age' => 33
-            ]
+                'age' => 33,
+            ],
         ];
     }
-
 }

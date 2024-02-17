@@ -34,7 +34,7 @@ class CreateCustomerTest extends TestCase
         // $this->customerRepository = $this->getMockBuilder(CustomerRepository::class)->disableOriginalConstructor()->getMock();
     }
 
-    public function testCreateCustomer()
+    public function testCreateCustomer(): void
     {
         $dto = CreateCustomerInputDTO::create(
             self::VALUES['name'],
@@ -48,21 +48,17 @@ class CreateCustomerTest extends TestCase
             ->expects($this->once())
             ->method('save')
             ->with(
-                $this->callback(
-                    function (Customer $customer): bool {
-                        return $customer->name() === self::VALUES['name'] &&
-                            $customer->email() === self::VALUES['email'] &&
-                            $customer->address() === self::VALUES['address'] &&
-                            $customer->age() === self::VALUES['age'] &&
-                            $customer->employeeId() === self::VALUES['employeeId'];
-                    }
-                )
+                $this->callback(function (Customer $customer): bool {
+                    return $customer->name() === self::VALUES['name']
+                        && $customer->email() === self::VALUES['email']
+                        && $customer->address() === self::VALUES['address']
+                        && $customer->age() === self::VALUES['age']
+                        && $customer->employeeId() === self::VALUES['employeeId'];
+                })
             );
 
         $responseDTO = $this->useCase->handle($dto);
 
         self::assertInstanceOf(CreateCustomerOutputDTO::class, $responseDTO);
-
     }
-
 }

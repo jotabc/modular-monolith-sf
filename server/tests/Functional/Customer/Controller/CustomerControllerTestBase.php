@@ -53,13 +53,18 @@ class CustomerControllerTestBase extends WebTestCase
 
     protected function getResponseData(Response $response): array
     {
-        return (array)\json_decode($response->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+        try {
+            return \json_decode($response->getContent(), true);
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     protected function createCustomer(): string
     {
         $payload = [
             'name' => 'Peter',
+            'email' => 'peter@api.com',
             'address' => 'Fake street 123',
             'age' => 30,
             'employeeId' => 'd368263a-ab71-4587-960d-cfe9725c373f'
@@ -68,6 +73,11 @@ class CustomerControllerTestBase extends WebTestCase
         self::$admin->request(Request::METHOD_POST, self::CREATE_CUSTOMER_ENDPOINT, [], [], [], \json_encode($payload));
 
         $response = self::$admin->getResponse();
+
+        if (Response::HTTP_CREATED !== $response->getStatusCode()) {
+            throw new \RuntimeException('Error creating customer');
+        }
+
         $responseData = $this->getResponseData($response);
 
         return $responseData['customerId'];

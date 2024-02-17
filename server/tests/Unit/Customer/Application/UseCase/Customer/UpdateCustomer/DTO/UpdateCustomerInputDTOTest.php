@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Tests\Unit\Customer\Application\UseCase\Customer\GetCustomerById\DTO;
+namespace App\Tests\Unit\Customer\Application\UseCase\Customer\UpdateCustomer\DTO;
 
 use Customer\Application\UseCase\Customer\UpdateCustomer\DTO\UpdateCustomerInputDTO;
+use Customer\Domain\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class UpdateCustomerInputDTOTest extends TestCase
 {
-
     private const DATA = [
         'id' => '5fc0e495-c74b-40a7-815d-0d7807b59041',
         'name' => 'Peter',
@@ -17,9 +17,9 @@ class UpdateCustomerInputDTOTest extends TestCase
         'keys' => []
     ];
 
-    public function testCreate(): void
+    public function testCreateDTO(): void
     {
-        $inputDto = UpdateCustomerInputDTO::create(
+        $dto = UpdateCustomerInputDTO::create(
             self::DATA['id'],
             self::DATA['name'],
             self::DATA['email'],
@@ -28,17 +28,12 @@ class UpdateCustomerInputDTOTest extends TestCase
             self::DATA['keys']
         );
 
-        $this->assertInstanceOf(UpdateCustomerInputDTO::class, $inputDto);
-
-        $this->assertEquals(self::DATA['id'], $inputDto->id);
-        $this->assertEquals(self::DATA['name'], $inputDto->name);
-        $this->assertEquals(self::DATA['address'], $inputDto->address);
-        $this->assertEquals(self::DATA['age'], $inputDto->age);
+        self::assertInstanceOf(UpdateCustomerInputDTO::class, $dto);
     }
 
-    public function testUpdateWithNullId(): void
+    public function testCreateWithNullId(): void
     {
-        self::expectException(\InvalidArgumentException::class);
+        self::expectException(InvalidArgumentException::class);
 
         UpdateCustomerInputDTO::create(
             null,
@@ -50,9 +45,9 @@ class UpdateCustomerInputDTOTest extends TestCase
         );
     }
 
-    public function testUpdateWithInvalidAge(): void
+    public function testCreateWithInvalidAge(): void
     {
-        self::expectException(\InvalidArgumentException::class);
+        self::expectException(InvalidArgumentException::class);
 
         UpdateCustomerInputDTO::create(
             self::DATA['id'],

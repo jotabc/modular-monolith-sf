@@ -46,50 +46,52 @@ class UpdateCustomerTest extends TestCase
     $this->customerRepository = $this->createMock(CustomerRepository::class);
     $this->useCase = new UpdateCustomer($this->customerRepository);
 
-    $this->inputDto = UpdateCustomerInputDTO::create(
-      self::DATA_TO_UPDATE['id'],
-      self::DATA_TO_UPDATE['name'],
-      self::DATA['email'],
-      self::DATA_TO_UPDATE['address'],
-      self::DATA_TO_UPDATE['age'],
-      self::DATA_TO_UPDATE['keys']
-    );
-  }
-
-  public function testUpdateCustomer(): void
-  {
-
-    $customer = Customer::create(
-      self::DATA['id'],
-      self::DATA['name'],
-      self::DATA['email'],
-      self::DATA['address'],
-      self::DATA['age'],
-      self::EMPLOYEE_ID
+    $this->inputDTO = UpdateCustomerInputDTO::create(
+        self::DATA_TO_UPDATE['id'],
+        self::DATA_TO_UPDATE['name'],
+        self::DATA_TO_UPDATE['email'],
+        self::DATA_TO_UPDATE['address'],
+        self::DATA_TO_UPDATE['age'],
+        self::DATA_TO_UPDATE['keys']
     );
 
-    $this->customerRepository
-      ->expects($this->once())
-      ->method('findOneByIdOrFail')
-      ->with($this->inputDto->id)
-      ->willReturn($customer);
+    $this->useCase = new UpdateCustomer($this->customerRepository);
+}
 
-    $this->customerRepository
-      ->expects($this->once())
-      ->method('save')
-      ->with(
-        $this->callback(function (Customer $customer): bool {
-          return $customer->name() === $this->inputDto->name
-            && $customer->address() === $this->inputDto->address
-            && $customer->age() === $this->inputDto->age;
-        })
-      );
+    public function testUpdateCustomer(): void
+    {
+        $customer = Customer::create(
+            self::DATA['id'],
+            self::DATA['name'],
+            self::DATA['email'],
+            self::DATA['address'],
+            self::DATA['age'],
+            self::EMPLOYEE_ID
+        );
 
-    $reponseDTO = $this->useCase->handle($this->inputDto);
+        $this->customerRepository
+            ->expects($this->once())
+            ->method('findOneByIdOrFail')
+            ->with($this->inputDTO->id)
+            ->willReturn($customer);
 
-    self::assertInstanceOf(UpdateCustomerOutputDTO::class, $reponseDTO);
-    self::assertEquals($this->inputDto->name, $reponseDTO->customerData['name']);
-    self::assertEquals($this->inputDto->address, $reponseDTO->customerData['address']);
-    self::assertEquals($this->inputDto->age, $reponseDTO->customerData['age']);
-  }
+        $this->customerRepository
+            ->expects($this->once())
+            ->method('save')
+            ->with(
+                $this->callback(function (Customer $customer): bool {
+                    return $customer->name() === $this->inputDTO->name
+                        && $customer->address() === $this->inputDTO->address
+                        && $customer->age() === $this->inputDTO->age;
+                })
+            );
+
+        $responseDTO = $this->useCase->handle($this->inputDTO);
+
+        self::assertInstanceOf(UpdateCustomerOutputDTO::class, $responseDTO);
+
+        self::assertEquals($this->inputDTO->name, $responseDTO->customerData['name']);
+        self::assertEquals($this->inputDTO->address, $responseDTO->customerData['address']);
+        self::assertEquals($this->inputDTO->age, $responseDTO->customerData['age']);
+    }
 }

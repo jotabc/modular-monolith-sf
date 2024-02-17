@@ -31,13 +31,9 @@ class GetCustomerByIdTest extends TestCase
         $this->useCase = new GetCustomerById($this->customerRepository);
     }
 
-    public function testGetCustomerById()
+    public function testGetCustomerById(): void
     {
         $inputDto = GetCustomerByIdInputDTO::create(self::CUSTOMER_DATA['id']);
-
-        // $customer = $this->createMock(Customer::class);
-        // $customer->method('name')->willReturn('Juan');
-        // $customer->method('address')->willReturn('Fake street 1234');
 
         $customer = Customer::create(
             self::CUSTOMER_DATA['id'],
@@ -65,7 +61,7 @@ class GetCustomerByIdTest extends TestCase
         self::assertEquals(self::CUSTOMER_DATA['employeeId'], $responseDTO->employeeId);
     }
 
-    public function testException(): void
+    public function testGetCustomerByIdException(): void
     {
         $inputDto = GetCustomerByIdInputDTO::create(self::CUSTOMER_DATA['id']);
 
@@ -79,5 +75,4 @@ class GetCustomerByIdTest extends TestCase
 
         $this->useCase->handle($inputDto);
     }
-
 }

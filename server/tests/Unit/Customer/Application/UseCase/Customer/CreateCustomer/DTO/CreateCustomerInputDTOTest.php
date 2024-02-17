@@ -37,7 +37,7 @@ class CreateCustomerInputDTOTest extends TestCase
     public function testCreateWithNullValues(): void
     {
         self::expectException(InvalidArgumentException::class);
-        // self::expectExceptionMessage('Invalid arguments [name, age]');
+        self::expectExceptionMessage('Invalid arguments [age]');
 
         CreateCustomerInputDTO::create(
             null,
@@ -53,12 +53,12 @@ class CreateCustomerInputDTOTest extends TestCase
         self::expectException(InvalidArgumentException::class);
         self::expectExceptionMessage('Value must be min [2] and max [10] characters');
 
-        $dto = CreateCustomerInputDTO::create(
+        CreateCustomerInputDTO::create(
             'A',
             self::VALUES['email'],
             self::VALUES['address'],
             self::VALUES['age'],
-            self::VALUES['employeeId']
+            self::VALUES['employeeId'],
         );
     }
 
@@ -67,7 +67,7 @@ class CreateCustomerInputDTOTest extends TestCase
         self::expectException(InvalidArgumentException::class);
         self::expectExceptionMessage('Value must be min [2] and max [10] characters');
 
-        $dto = CreateCustomerInputDTO::create(
+        CreateCustomerInputDTO::create(
             'ABCDEABCDEAABCDEABCDEA',
             self::VALUES['email'],
             self::VALUES['address'],
@@ -81,7 +81,7 @@ class CreateCustomerInputDTOTest extends TestCase
         self::expectException(InvalidArgumentException::class);
         self::expectExceptionMessage('Age has to be at least 18');
 
-        $dto = CreateCustomerInputDTO::create(
+        CreateCustomerInputDTO::create(
             self::VALUES['name'],
             self::VALUES['email'],
             self::VALUES['address'],

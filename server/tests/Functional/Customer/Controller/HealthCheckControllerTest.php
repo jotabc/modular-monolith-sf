@@ -19,7 +19,7 @@ class HealthCheckControllerTest extends CustomerControllerTestBase
         // obtenemos la respuesta es necesario convertirla a un array porque
         // así estamos devolviendo un New JsonResponse como en el controlador
         $response = self::$admin->getResponse();
-        $responseData = \json_decode($response->getContent(), true);
+        $responseData = $this->getResponseData($response);
 
         self::assertEquals(Response::HTTP_OK, $response->getStatusCode());
         self::assertEquals('Module Customer up and running', $responseData['message']);
