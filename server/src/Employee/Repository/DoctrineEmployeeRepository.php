@@ -40,6 +40,11 @@ class DoctrineEmployeeRepository implements EmployeeRepository
         }
     }
 
+    public function findOneByEmail(string $email): ?Employee
+    {
+        return $this->repository->findOneBy(['email' => $email]);
+    }
+
     public function findOneByEmailOrFail(string $email): Employee
     {
         if (null === $employee = $this->repository->findOneBy(['email' => $email])) {
@@ -56,10 +61,5 @@ class DoctrineEmployeeRepository implements EmployeeRepository
         }
 
         return $employee;
-    }
-
-    public function findOneByEmail(string $email): ?Employee
-    {
-        return $this->repository->findOneBy(['email' => $email]);
     }
 }

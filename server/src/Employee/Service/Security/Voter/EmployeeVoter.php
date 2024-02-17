@@ -9,6 +9,8 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class EmployeeVoter extends Voter
 {
     public const GET_EMPLOYEE_CUSTOMERS = 'GET_EMPLOYEE_CUSTOMERS';
+    public const CREATE_CUSTOMER = 'CREATE_CUSTOMER';
+    public const DELETE_CUSTOMER = 'DELETE_CUSTOMER';
 
     protected function supports(string $attribute, $subject): bool
     {
@@ -21,7 +23,7 @@ class EmployeeVoter extends Voter
         /** @var Employee $tokenUser */
         $tokenUser = $token->getUser();
 
-        if (self::GET_EMPLOYEE_CUSTOMERS === $attribute) {
+        if (\in_array($attribute, $this->allowedAttributes(), true)) {
             return $tokenUser->getId() === $subject;
         }
 
@@ -32,6 +34,8 @@ class EmployeeVoter extends Voter
     {
         return [
             self::GET_EMPLOYEE_CUSTOMERS,
+            self::CREATE_CUSTOMER,
+            self::DELETE_CUSTOMER,
         ];
     }
 }
