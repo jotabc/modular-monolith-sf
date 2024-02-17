@@ -23,4 +23,9 @@ final class HttpClient implements HttpClientInterface
     {
         return $this->client->get($uri, $options);
     }
+
+    public function post(string $uri, array $options = []): ResponseInterface
+    {
+        return $this->client->post($uri, $options);
+    }
 }

@@ -3,7 +3,7 @@ import {
   Flex,
   FormControl,
   Heading,
-  Icon,
+  Icon, IconButton,
   Input,
   Table,
   TableContainer,
@@ -12,17 +12,20 @@ import {
   Th,
   Thead,
   Tr
-} from "@chakra-ui/react"
+} from '@chakra-ui/react'
 import { useSelector } from 'react-redux'
 import { useCallback, useEffect, useState } from 'react'
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
+import {FiChevronDown, FiChevronUp, FiPlus} from 'react-icons/fi'
 
 import SidebarWithHeader from '../../src/components/sidebar/sidebar'
 import { searchCustomers } from '../../src/service/api/customer/customer.service'
 import InfinityScroll from '../../src/common/infinityScroll'
+import {useRouter} from 'next/router'
 
 export default function Customers() {
   const id = useSelector(state => state.auth.id)
+  const router = useRouter()
+  
   const [customers, setCustomers] = useState([])
   const [meta, setMeta] = useState({
     page: 1,
@@ -34,7 +37,7 @@ export default function Customers() {
     name: '',
   })
 
-  const [sorting, setSetsorting] = useState({
+  const [sorting, setSorting] = useState({
     sort: 'name',
     order: 'asc'
   })
@@ -68,7 +71,7 @@ export default function Customers() {
   return (
     <SidebarWithHeader>
       <Heading>Customer List</Heading>
-      <Flex display={{ md: 'flex' }} alignItems='start' mt={5} mb={5}>
+      <Flex display={{ md: 'flex' }} alignItems='center' justifyContent='space-between' mt={5} mb={5}>
         <Box>
           <FormControl>
             <Input
@@ -99,6 +102,17 @@ export default function Customers() {
             />
           </FormControl>
         </Box>
+        
+        <Box mr="10">
+          <IconButton
+            size="lg"
+            backgroundColor="cyan.400"
+            aria-label="add customer"
+            icon={<FiPlus color="white" />}
+            onClick={() => router.push('/customers/add')}
+          />
+        </Box>
+        
       </Flex>
 
       <TableContainer>
@@ -112,7 +126,7 @@ export default function Customers() {
                   style={{ display: sorting.sort === 'name' ? 'inline' : 'none' }}
                   as={sorting.order === 'asc' ? FiChevronDown : FiChevronUp}
                   onClick={() => {
-                    setSetsorting(prevState => {
+                    setSorting(prevState => {
                       return {
                         ...prevState,
                         sort: 'name',

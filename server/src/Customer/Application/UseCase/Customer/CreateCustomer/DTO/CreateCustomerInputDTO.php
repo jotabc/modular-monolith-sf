@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Customer\Application\UseCase\Customer\CreateCustomer\DTO;
 
 use Customer\Domain\Model\Customer;
@@ -13,10 +15,11 @@ class CreateCustomerInputDTO
     use AssertLengthRangeTrait;
     use AssertMinimumAgeTrait;
 
-    public const ARGS = [
+    private const ARGS = [
         'age',
         'employeeId',
     ];
+    private const MINIMUM_AGE = 18;
 
     private function __construct(
         public readonly ?string $name,
@@ -25,17 +28,17 @@ class CreateCustomerInputDTO
         public readonly ?int $age,
         public readonly ?string $employeeId
     ) {
-        $this->assertNotNull(self::ARGS, [$age, $employeeId]);
+        $this->assertNotNull(self::ARGS, [$this->age, $this->employeeId]);
 
-        if (!\is_null($name)) {
-            $this->asserValueRangeLength($name, Customer::NAME_MIN_LENGTH, Customer::NAME_MAX_LENGTH);
+        if (!\is_null($this->name)) {
+            $this->asserValueRangeLength($this->name, Customer::NAME_MIN_LENGTH, Customer::NAME_MAX_LENGTH);
         }
 
-        $this->assertMinimumAge($age, Customer::MINIMUM_AGE);
+        $this->assertMinimumAge($this->age, Customer::MIN_AGE);
     }
 
     public static function create(?string $name, ?string $email, ?string $address, ?int $age, ?string $employeeId): self
     {
-        return new static($name, $email,$address, $age, $employeeId);
+        return new static($name, $email, $address, $age, $employeeId);
     }
 }

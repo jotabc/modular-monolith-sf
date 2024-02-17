@@ -5,9 +5,9 @@ namespace Customer\Adapter\Framework\Http\Controller\Customer;
 use Customer\Adapter\Framework\Http\DTO\CreateCustomerRequestDTO;
 use Customer\Application\UseCase\Customer\CreateCustomer\CreateCustomer;
 use Customer\Application\UseCase\Customer\CreateCustomer\DTO\CreateCustomerInputDTO;
+use Customer\Domain\Exception\CustomerAlreadyExistsException;
 use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,11 +24,12 @@ class CreateCustomerController extends AbstractController
     #[Route('', name: 'create_customer', methods: ['POST'])]
     public function __invoke(CreateCustomerRequestDTO $request): Response
     {
-        $responseDto = $this->createCustomer->handle(CreateCustomerInputDTO::create($request->name, $request->email, $request->address, $request->age, $request->employeeId));
+        try {
+            $responseDTO = $this->createCustomer->handle(CreateCustomerInputDTO::create($request->name, $request->email, $request->address, $request->age, $request->employeeId));
+        } catch (CustomerAlreadyExistsException $e) {
+            return $this->json(['error' => $e->getMessage()], Response::HTTP_CONFLICT);
+        }
 
-        return new JsonResponse(
-            ['customerId' => $responseDto->id],
-            Response::HTTP_CREATED
-        );
+        return $this->json(['customerId' => $responseDTO->id], Response::HTTP_CREATED);
     }
 }
