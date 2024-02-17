@@ -37,11 +37,11 @@ COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 # Update Apache config
 COPY ./default.conf /etc/apache2/sites-available/default.conf
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-RUN a2enmod rewrite
-RUN a2dissite 000-default
-RUN a2ensite default
-RUN service apache2 restart
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
+    && a2enmod rewrite \
+    && a2dissite 000-default \
+    && a2ensite default \
+    && service apache2 restart
 
 # Modify upload file size
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
