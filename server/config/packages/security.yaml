@@ -11,8 +11,9 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-#        docs:
-#            pattern: ^/api/doc$
+#       docs:
+#           pattern: ^/api/doc$
+#           methods: [ GET ]
 #            security: false
         login:
             pattern: ^/api/login
@@ -21,18 +22,19 @@ security:
                 check_path: /api/login_check
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-            
+
         api:
             pattern:   ^/api
             stateless: true
             jwt: ~
-    
+
     access_control:
         - { path: ^/api/customers, allow_if: "false == request.headers.has('X-Forwarded-For')" }
-        - { path: ^/api/rental,    allow_if: "false == request.headers.has('X-Forwarded-For')" }
-        - { path: ^/api/doc,       roles: PUBLIC_ACCESS }
-        - { path: ^/api/login,     roles: PUBLIC_ACCESS }
-        - { path: ^/api,           roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/rental, allow_if: "false == request.headers.has('X-Forwarded-For')" }
+        - { path: ^/api/employees/health-check, roles: PUBLIC_ACCESS }
+        - { path: ^/api/doc, roles: PUBLIC_ACCESS }
+        - { path: ^/api/login, roles: PUBLIC_ACCESS }
+        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:

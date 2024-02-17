@@ -21,4 +21,4 @@ services:
 #       arguments:
 #           $client: 'GuzzleHttp\Client'
 
-    Employee\Http\HttpClientInterface: '@Employee\Http\HttpClient'
+#    Employee\Http\HttpClientInterface: '@Employee\Http\HttpClient'

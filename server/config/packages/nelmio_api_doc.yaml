@@ -1,162 +1,173 @@
 nelmio_api_doc:
-    documentation:
-        info:
-            title: Car Rental
-            version: 1.0.0
-        components:
-            securitySchemes:
-                Bearer:
-                    type: http
-                    scheme: bearer
-                    bearerFormat: JWT
-        paths:
-            ### CUSTOMER PATHS ###
-            /api/customers/health-check:
-                get:
-                    responses:
-                        200:
-                            description: Module Customer running
-                            content:
-                                application/json:
-                                    schema:
-                                        type: object
-                                        properties:
-                                            message: { type: string, example: Module Customer up and running! }
-            /api/customers:
-                post:
-                    requestBody:
-                        content:
-                            application/json:
-                                schema:
-                                    type: object
-                                    properties:
-                                        name: { type: string, example: Peter }
-                                        email: { type: string, example: peter@api.com }
-                                        address: { type: string, example: Fake street 123 }
-                                        age: { type: number, example: 30 }
-                                        employeeId: { type: string, example: 2d995fa5-7da7-4f49-94ad-b6bed527dca9 }
-                    responses:
-                        201:
-                            description: Customer created
-                            content:
-                                application/json:
-                                    schema:
-                                        type: object
-                                        properties:
-                                            customerId: { type: string, example: 2d995fa5-7da7-4f49-94ad-b6bed527dca9 }
-            /api/customers/{id}:
-                get:
-                    responses:
-                        200:
-                            description: Customer data
-                            content:
-                                application/json:
-                                    schema:
-                                        type: object
-                                        properties:
-                                            id: { type: string, example: 2d995fa5-7da7-4f49-94ad-b6bed527dca9 }
-                                            name: { type: string, example: Peter }
-                                            email: { type: string, example: peter@api.com }
-                                            address: { type: string, example: Fake street 123 }
-                                            age: { type: number, example: 30 }
-                                            employeeId: { type: string, example: 2d995fa5-7da7-4f49-94ad-b6bed527dca9 }
-            patch:
-                requestBody:
-                    content:
-                        application/json:
-                            schema:
-                                type: object
-                                properties:
-                                    name: { type: string, example: Peter }
-                                    email: { type: string, example: peter@api.com }
-                                    address: { type: string, example: Fake street 123 }
-                                    age: { type: number, example: 30 }
-                responses:
-                    200:
-                        description: Customer data
-                        content:
-                            application/json:
-                                schema:
-                                    type: object
-                                    properties:
-                                        id: { type: string, example: 2d995fa5-7da7-4f49-94ad-b6bed527dca9 }
-                                        name: { type: string, example: Peter }
-                                        address: { type: string, example: Fake street 123 }
-                                        age: { type: number, example: 30 }
-                                        employeeId: { type: string, example: 2d995fa5-7da7-4f49-94ad-b6bed527dca9 }
-            delete:
-                responses:
-                    204:
-                        description: Customer deleted
-                        
-            ### EMPLOYEE PATHS ###
-            /api/employees/health-check:
-                get:
-                    tags:
-                        - Employee
-                    responses:
-                        200:
-                            description: Module Employee running
-                            content:
-                                application/json:
-                                    schema:
-                                        type: object
-                                        properties:
-                                            message: { type: string, example: Module Employee up and running! }
-            /api/employees/{id}/customers:
-                get:
-                    tags:
-                        - Employee
-                    parameters:
-                        -  in: query
-                           name: page
-                           schema:
-                              type: number
-                           required: false
-                        -   in: query
-                            name: limit
-                            schema:
-                                type: number
-                            required: false
-                    responses:
-                        200:
-                            description: Collection of customers per employee id
-                            content:
-                                application/json:
-                                    schema:
-                                        type: object
-                                        properties:
-                                            items:
-                                                type: array
-                                                items:
-                                                    type: object
-                                                    properties:
-                                                        id: { type: string }
-                                                        name: { type: string }
-                                                        address: { type: string }
-                                            meta:
-                                                type: object
-                                                properties:
-                                                    total: { type: number, example: 2 }
-                                                    page: { type: number, example: 1 }
-                                                    limit: { type: number, example: 10 }
-                                                    hasNext: { type: boolean, example: true }
+  documentation:
+    info:
+      title: Codenip Car Rental
+      version: 1.0.0
+    components:
+      securitySchemes:
+        Bearer:
+          type: http
+          scheme: bearer
+          bearerFormat: JWT
+    paths:
+      ### CUSTOMER PATHS ###
+      /api/customers/health-check:
+        get:
+          tags:
+            - Customers
+          responses:
+            200:
+              description: Module Customer running
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      message: { type: string, example: Module Customer up and running! }
+      /api/customers:
+        post:
+          tags:
+            - Customers
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    name: { type: string, example: Peter }
+                    email: { type: string, example: peter@api.com }
+                    address: { type: string, example: Fake street 123 }
+                    age: { type: number, example: 30 }
+                    employeeId: { type: string, example: 2d995fa5-7da7-4f49-94ad-b6bed527dca9 }
+          responses:
+            201:
+              description: Customer created
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      customerId: { type: string, example: 2d995fa5-7da7-4f49-94ad-b6bed527dca9 }
+      /api/customers/{id}:
+        get:
+          tags:
+            - Customers
+          responses:
+            200:
+              description: Customer data
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      id: { type: string, example: 2d995fa5-7da7-4f49-94ad-b6bed527dca9 }
+                      name: { type: string, example: Peter }
+                      email: { type: string, example: peter@api.com }
+                      address: { type: string, example: Fake street 123 }
+                      age: { type: number, example: 30 }
+                      employeeId: { type: string, example: 2d995fa5-7da7-4f49-94ad-b6bed527dca9 }
+        patch:
+          tags:
+            - Customers
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    name: { type: string, example: Peter }
+                    email: { type: string, example: peter@api.com }
+                    address: { type: string, example: Fake street 123 }
+                    age: { type: number, example: 30 }
+          responses:
+            200:
+              description: Customer data
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      id: { type: string, example: 2d995fa5-7da7-4f49-94ad-b6bed527dca9 }
+                      name: { type: string, example: Peter }
+                      email: { type: string, example: peter@api.com }
+                      address: { type: string, example: Fake street 123 }
+                      age: { type: number, example: 30 }
+                      employeeId: { type: string, example: 2d995fa5-7da7-4f49-94ad-b6bed527dca9 }
+        delete:
+          tags:
+            - Customers
+          responses:
+            204:
+              description: Customer deleted
 
-            ### RENTAL PATHS ###
-            /api/rentals/health-check:
-                get:
-                    tags:
-                        - Rental
-                    responses:
-                        200:
-                            description: Module Rental running
-                            content:
-                                application/json:
-                                    schema:
-                                        type: object
-                                        properties:
-                                            message: { type: string, example: Module Rental up and running! }
+      ### EMPLOYEE PATHS ###
+      /api/employees/health-check:
+        get:
+          tags:
+            - Employee
+          responses:
+            200:
+              description: Module Employee running
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      message: { type: string, example: Module Employee up and running! }
+      /api/employees/{id}/customers:
+        get:
+          tags:
+            - Employee
+          parameters:
+            - in: query
+              name: page
+              schema:
+                type: number
+              required: false
+            - in: query
+              name: limit
+              schema:
+                type: number
+              required: false
+          responses:
+            200:
+              description: Collection of customers per employee id
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id: { type: string }
+                            name: { type: string }
+                            address: { type: string }
+                      meta:
+                        type: object
+                        properties:
+                          total: { type: number, example: 2 }
+                          page: { type: number, example: 1 }
+                          limit: { type: number, example: 10 }
+                          hasNext: { type: boolean, example: true }
 
-    areas: # to filter documented areas
-        default:
-            path_patterns: [ ^/api(?!/doc$) ] # Accepts routes under /api except /api/doc
+      ### RENTAL PATHS ###
+      /api/rentals/health-check:
+        get:
+          tags:
+            - Rental
+          responses:
+            200:
+              description: Module Rental running
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      message: { type: string, example: Module Rental up and running! }
+
+  areas: # to filter documented areas
+    path_patterns:
+      - ^/api(?!/doc|/doc.json$) # Accepts routes under /api except /api/doc

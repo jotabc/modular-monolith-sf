@@ -2,12 +2,12 @@ kernel:
     resource: ../../src/Kernel.php
     type: annotation
 
-controllers:
+customer_controllers:
     resource: ../../src/Customer/Adapter/Framework/Http/Controller/
     type: annotation
     prefix: /api/customers
     trailing_slash_on_root: false
-    
+
 employee_controllers:
     resource: ../../src/Employee/Controller/
     type: annotation
