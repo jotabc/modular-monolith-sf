@@ -3,7 +3,7 @@
 namespace Rental\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Rental\Entity\Rental;
 
