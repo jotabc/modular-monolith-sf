@@ -6,6 +6,17 @@
       <sourceFolder url="file://$MODULE_DIR$/src/ModuleB" isTestSource="false" packagePrefix="ModuleB\" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="App\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/server/src" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/server/src/Customer" isTestSource="false" packagePrefix="Customer\" />
+      <sourceFolder url="file://$MODULE_DIR$/server/src/Employee" isTestSource="false" packagePrefix="Employee\" />
+      <sourceFolder url="file://$MODULE_DIR$/server/src/Rental" isTestSource="false" packagePrefix="Rental\" />
+      <sourceFolder url="file://$MODULE_DIR$/server/tests" isTestSource="true" packagePrefix="App\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/server_2/src" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/server_2/src/Customer" isTestSource="false" packagePrefix="Customer\" />
+      <sourceFolder url="file://$MODULE_DIR$/server_2/src/Employee" isTestSource="false" packagePrefix="Employee\" />
+      <sourceFolder url="file://$MODULE_DIR$/server_2/src/Rental" isTestSource="false" packagePrefix="Rental\" />
+      <sourceFolder url="file://$MODULE_DIR$/server_2/tests" isTestSource="true" packagePrefix="App\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/server_2/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/cache" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/collections" />

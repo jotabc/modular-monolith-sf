@@ -6,6 +6,7 @@
          backupGlobals="false"
          colors="true"
          bootstrap="tests/bootstrap.php"
+         convertDeprecationsToExceptions="false"
 >
     <php>
         <ini name="display_errors" value="1" />
@@ -14,7 +15,7 @@
         <server name="SHELL_VERBOSITY" value="-1" />
         <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
         <server name="SYMFONY_PHPUNIT_VERSION" value="9.5" />
-        <env name="KERNEL_CLASS" value="App\Kernel" />
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
     </php>
 
     <testsuites>
@@ -23,6 +24,24 @@
         </testsuite>
     </testsuites>
 
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </coverage>
+
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+    </listeners>
+
     <extensions>
+        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension" />
     </extensions>
+
+    <!-- Run `composer require symfony/panther` before enabling this extension -->
+    <!--
+    <extensions>
+        <extension class="Symfony\Component\Panther\ServerExtension" />
+    </extensions>
+    -->
 </phpunit>

@@ -41,16 +41,20 @@ composer-install: ## Installs composer dependencies
 	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} composer install --no-interaction
 
 .PHONY: migrations migrations-test
-migrations: ## run migrations for dev/prod environment
-	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} bin/console doctrine:migrations:migrate -n
-	# para migraciones una a una lo más recomendable para que nos genere en cada schema el archivo de doctrine_migrations que es donde están todas las migraciones de dicho schema.
-	# U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} bin/console doctrine:migrations:execute 'DoctrineMigrations\Version20240112155502' -n --em=customer_em
+migrations: ## Run migrations for dev/prod environments
+	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} bin/console doctrine:migration:migrate -n
 
-migrations-test: ## run migrations for test environment
-	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} bin/console doctrine:migrations:migrate -n --env=test
+migrations-test: ## Run migrations for test environments
+	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} bin/console doctrine:migration:migrate -n --env=test
 
-code-style: ## run code style
+code-style:
 	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} vendor/bin/php-cs-fixer fix src --rules=@Symfony
+
+code-style-check:
+	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} vendor/bin/php-cs-fixer fix src --rules=@Symfony --dry-run
+
+generate-ssh-keys: ## Generates SSH keys for JWT authentication
+	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} bin/console lexik:jwt:generate-keypair
 # End backend commands
 
 ssh-be: ## bash into the be container
@@ -58,4 +62,4 @@ ssh-be: ## bash into the be container
 
 .PHONY: tests
 tests:
-	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} vendor/bin/phpunit -c phpunit.xml.dist
+	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} vendor/bin/simple-phpunit -c phpunit.xml.dist

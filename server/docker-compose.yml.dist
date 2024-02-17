@@ -4,7 +4,7 @@ services:
     modular-monolith-example-app:
         container_name: modular-monolith-example-app
         build:
-            context: ./.docker/php-apache
+            context: .docker/php-apache
             args:
                 UID: $U_ID
         volumes:
@@ -27,14 +27,14 @@ services:
     modular-monolith-example-mysql:
         container_name: modular-monolith-example-mysql
         build:
-            context: ./.docker/database
+            context: .docker/database
         ports:
             - '3336:3306'
         environment:
             MYSQL_DATABASE: customer_db
             MYSQL_ROOT_PASSWORD: root
         volumes:
-            - ./mysql-data:/var/lib/mysql
+            - modular-monolith-example-mysql-data:/var/lib/mysql
         networks:
             - modular-monolith-example-network
         command: [ 'mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
@@ -43,4 +43,4 @@ networks:
     modular-monolith-example-network:
 
 volumes:
-    mysql-data:
+    modular-monolith-example-mysql-data:
