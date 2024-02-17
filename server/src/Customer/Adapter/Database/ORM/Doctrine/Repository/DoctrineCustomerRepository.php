@@ -8,14 +8,15 @@ use Customer\Domain\Exception\ResourceNotFoundException;
 use Customer\Domain\Model\Customer;
 use Customer\Domain\Repository\CustomerRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 
 class DoctrineCustomerRepository implements CustomerRepository
 {
-    private ServiceEntityRepository $repository;
-    private ObjectManager $manager;
+    private readonly ServiceEntityRepository $repository;
+    private readonly ObjectManager|EntityManagerInterface $manager;
 
     public function __construct(ManagerRegistry $managerRegistry)
     {
@@ -30,6 +31,11 @@ class DoctrineCustomerRepository implements CustomerRepository
         }
 
         return $customer;
+    }
+
+    public function findOneByEmail(string $email): ?Customer
+    {
+        return $this->repository->findOneBy(['email' => $email]);
     }
 
     public function search(CustomerFilter $filter): PaginatedResponse

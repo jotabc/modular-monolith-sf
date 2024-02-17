@@ -13,7 +13,7 @@ class CreateCustomerInputDTO
     use AssertLengthRangeTrait;
     use AssertMinimumAgeTrait;
 
-    public const ARGS = [
+    private const ARGS = [
         'age',
         'employeeId',
     ];
@@ -36,6 +36,6 @@ class CreateCustomerInputDTO
 
     public static function create(?string $name, ?string $email, ?string $address, ?int $age, ?string $employeeId): self
     {
-        return new static($name, $email,$address, $age, $employeeId);
+        return new static($name, $email, $address, $age, $employeeId);
     }
 }

@@ -2,11 +2,13 @@
 
 namespace Customer\Adapter\Framework\Listener;
 
+use App\Customer\Domain\Exception\CustomerAlreadyExistsException;
 use Customer\Domain\Exception\InvalidArgumentException;
 use Customer\Domain\Exception\ResourceNotFoundException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class JsonTransformerExceptionListener
 {
@@ -15,7 +17,7 @@ class JsonTransformerExceptionListener
         $e = $event->getThrowable();
 
         $data = [
-            'class' => get_class($e),
+            'class' => \get_class($e),
             'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
             'message' => $e->getMessage(),
         ];
@@ -26,6 +28,14 @@ class JsonTransformerExceptionListener
 
         if ($e instanceof InvalidArgumentException) {
             $data['code'] = Response::HTTP_BAD_REQUEST;
+        }
+
+        if ($e instanceof AccessDeniedException) {
+            $data['code'] = Response::HTTP_FORBIDDEN;
+        }
+
+        if ($e instanceof CustomerAlreadyExistsException) {
+            $data['code'] = Response::HTTP_CONFLICT;
         }
 
         $response = new JsonResponse($data, $data['code']);

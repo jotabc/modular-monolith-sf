@@ -7,15 +7,15 @@ use Customer\Application\UseCase\Customer\GetCustomerById\DTO\GetCustomerByIdInp
 use Customer\Application\UseCase\Customer\GetCustomerById\GetCustomerById;
 use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[OA\Tag(name: 'Customers')]
 class GetCustomerByIdController extends AbstractController
 {
-    public function __construct(private readonly GetCustomerById $useCase)
-    {
+    public function __construct(
+        private readonly GetCustomerById $useCase
+    ) {
     }
 
     #[Route('/{id}', name: 'get_customer_by_id', methods: ['GET'])]
@@ -23,6 +23,6 @@ class GetCustomerByIdController extends AbstractController
     {
         $responseDTO = $this->useCase->handle(GetCustomerByIdInputDTO::create($request->id));
 
-        return new JsonResponse($responseDTO);
+        return $this->json($responseDTO);
     }
 }
