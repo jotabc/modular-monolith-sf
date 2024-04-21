@@ -18,9 +18,9 @@ RUN apt update \
     # for MySQL
     && docker-php-ext-install pdo_mysql \
     # XDEBUG and APCu
-    && pecl install xdebug apcu
+    && pecl install -o -f xdebug \
     # enable Docker extensions
-    # && docker-php-ext-enable --ini-name 05-opcache.ini opcache xdebug apcu
+    && docker-php-ext-enable xdebug
 
 # Install and update composer
 RUN curl https://getcomposer.org/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer

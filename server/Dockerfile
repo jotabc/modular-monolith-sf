@@ -8,10 +8,10 @@ RUN apt update \
     && docker-php-ext-install intl pdo zip \
     # for MySQL
     && docker-php-ext-install pdo_mysql \
-    # APCu
-    && pecl install apcu \
+    # XDEBUG and APCu
+    && pecl install -o -f xdebug \
     # enable Docker extensions
-    && docker-php-ext-enable --ini-name 05-opcache.ini opcache apcu
+    && docker-php-ext-enable xdebug
 
 # Install and run composer
 COPY --from=composer:2.3.5 /usr/bin/composer /usr/bin/composer
